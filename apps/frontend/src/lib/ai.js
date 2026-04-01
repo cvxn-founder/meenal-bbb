@@ -1,4 +1,4 @@
-const WORKER_URL = import.meta.env.VITE_WORKER_URL || 'http://localhost:8787';
+const WORKER_URL = import.meta.env.VITE_WORKER_URL || 'https://bbb-worker.sidmishrabi.workers.dev';
 
 export async function analyzeStep(step, stepName, wizardData, contextData = {}) {
   const res = await fetch(`${WORKER_URL}/ai/analyze`, {
