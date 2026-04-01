@@ -4,34 +4,49 @@
   import DataCard from '$lib/components/DataCard.svelte';
   import AiPanel from '$lib/components/AiPanel.svelte';
   import { wizardState, saveState, advanceStep } from '$lib/store.svelte.js';
-  import { searchCompetitors } from '$lib/backend.js';
+  import { getTopBrands, getMarketMeta, getMarketDefinitionRef, searchTrials } from '$lib/backend.js';
   import { analyzeStep, formatNarrative } from '$lib/ai.js';
 
   let s = $derived(wizardState.steps.step3);
   let s1 = $derived(wizardState.steps.step1);
 
-  let competitors = $state([]);
+  let topBrands = $state([]);
+  let mktMeta = $state(null);
+  let mktDefRef = $state(null);
+  let trialResults = $state([]);
   let compLoading = $state(false);
   let aiLoading = $state(false);
 
   onMount(async () => {
-    if (s1.drugClass) {
-      await loadCompetitors();
-    }
-  });
-
-  async function loadCompetitors() {
-    if (!s1.drugClass) return;
     compLoading = true;
-    competitors = [];
     try {
-      competitors = await searchCompetitors(s1.drugClass);
-    } catch (e) {
-      console.warn(e);
+      const [brands, meta, defRef] = await Promise.all([
+        getTopBrands(12),
+        getMarketMeta(),
+        getMarketDefinitionRef()
+      ]);
+      topBrands = brands;
+      mktMeta = meta;
+      mktDefRef = defRef;
+      // Auto-populate empty fields from bundled data
+      const s3 = wizardState.steps.step3;
+      if (!s3.marketDefinition && meta?.category) {
+        s3.marketDefinition = `${meta.category} (${meta.awacs_code})`;
+        saveState();
+      }
+      if (!s3.marketSize && meta?.size_cr) {
+        s3.marketSize = `Rs. ${meta.size_cr} Cr, ${(meta.growth_rate*100).toFixed(1)}% growth (MAT Dec 2021)`;
+        saveState();
+      }
+      // Load condition trials if we have a condition/uses from step 1
+      if (s1.uses || s1.drugClass) {
+        const q = s1.uses || s1.drugClass;
+        trialResults = (await searchTrials(q, 5)).filter(t => t.entityType === 'trial');
+      }
     } finally {
       compLoading = false;
     }
-  }
+  });
 
   function update(field, value) {
     wizardState.steps.step3[field] = value;
@@ -41,7 +56,14 @@
   async function handleAnalyze() {
     aiLoading = true;
     try {
-      const narrative = await analyzeStep(3, 'Market Definition', wizardState.steps, { competitors });
+      const narrative = await analyzeStep(3, 'Market Definition', wizardState.steps, {
+        topBrands: topBrands.slice(0,10).map(b => ({
+          brand: b.brand, company: b.company,
+          mat_dec21: b.mat_val?.dec21, ms: b.ms_dec21, cagr: b.cagr_20_21
+        })),
+        marketMeta: mktMeta,
+        trialResults: trialResults.slice(0,3)
+      });
       wizardState.steps.step3.aiNarrative = formatNarrative(narrative);
       saveState();
     } catch (e) {
@@ -56,23 +78,37 @@
 
 <div class="step-body">
   <div class="data-panel scrollable">
-    <DataCard title="Competitor Drug Lookup" loading={compLoading}>
-      {#if competitors.length > 0}
-        {#each competitors.slice(0,8) as comp}
-          <div class="comp-item">
-            <span class="comp-name">{comp.name || comp.title || 'Unknown'}</span>
-            {#if comp.score}
-              <span class="badge accent">{(comp.score * 100).toFixed(0)}%</span>
-            {/if}
-          </div>
-        {/each}
-      {:else}
-        <p class="hint-text">Drug class from Step 1 ({s1.drugClass || 'not set'}) will be used to find competitors.</p>
-        {#if s1.drugClass}
-          <button onclick={loadCompetitors} style="margin-top:8px; font-size:var(--text-xs);">Reload</button>
-        {/if}
+    <DataCard title="V3X2 Top Brands (AWACS)" loading={compLoading}>
+      {#if mktMeta}
+        <div class="data-row" style="margin-bottom:8px">
+          <span class="key">Total market</span>
+          <span class="val accent">Rs. {mktMeta.size_cr} Cr</span>
+        </div>
       {/if}
+      {#each topBrands.slice(0, 10) as b, i}
+        <div class="comp-item" class:our-brand={s1.brandName && b.brand.toLowerCase().includes(s1.brandName.toLowerCase())}>
+          <span class="rank">{i+1}</span>
+          <div class="comp-info">
+            <span class="comp-name">{b.brand}</span>
+            <span class="comp-co">{b.company}</span>
+          </div>
+          <div class="comp-stats">
+            <span class="val accent">{b.mat_val?.dec21} Cr</span>
+            <span class="val muted {b.cagr_20_21 >= 0 ? 'green' : 'red'}">{b.cagr_20_21 >= 0 ? '+' : ''}{(b.cagr_20_21*100).toFixed(1)}%</span>
+          </div>
+        </div>
+      {/each}
     </DataCard>
+    {#if trialResults.length > 0}
+    <DataCard title="Clinical Evidence (Condition)">
+      {#each trialResults as t}
+        <div class="trial-item">
+          <span class="badge {t.phases?.[0] === 'PHASE4' ? 'green' : 'accent'}">{t.phases?.[0]?.replace('PHASE','P') || 'N/A'}</span>
+          <span class="trial-title">{t.snippet?.slice(0,80)}...</span>
+        </div>
+      {/each}
+    </DataCard>
+    {/if}
 
     <DataCard title="AI Insights">
       <AiPanel
@@ -93,8 +129,11 @@
     </div>
 
     <div class="field">
-      <label>Market Size &amp; Growth Rate</label>
-      <input type="text" value={s.marketSizeGrowthRate} oninput={e => update('marketSizeGrowthRate', e.target.value)} placeholder="e.g. Rs. 480 Cr, growing 8% YoY" />
+      <label for="mktSize">Market Size &amp; Growth Rate</label>
+      <input id="mktSize" type="text" value={s.marketSize} oninput={e => update('marketSize', e.target.value)} placeholder="e.g. Rs. 139 Cr, 7.8% growth" />
+      {#if mktMeta && !s.marketSize}
+        <span class="field-hint">Auto-filled from AWACS data on load</span>
+      {/if}
     </div>
 
     <div class="field">
@@ -144,27 +183,23 @@
   }
 
   .comp-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 7px 0;
-    border-bottom: 1px solid var(--divider);
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 0; border-bottom: 1px solid var(--divider);
     font-size: var(--text-sm);
   }
-
   .comp-item:last-child { border-bottom: none; }
-
-  .comp-name {
-    color: var(--text);
-    flex: 1;
-    margin-right: 8px;
-  }
-
-  .hint-text {
-    font-size: var(--text-sm);
-    color: var(--text-muted);
-    line-height: 1.6;
-  }
+  .comp-item.our-brand { background: rgba(158,203,255,0.07); border-radius: 4px; padding: 6px 4px; }
+  .rank { font-size: var(--text-xs); color: var(--text-muted); width: 16px; flex-shrink: 0; text-align: right; }
+  .comp-info { flex: 1; min-width: 0; }
+  .comp-name { display: block; color: var(--text); font-size: var(--text-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .comp-co { display: block; font-size: var(--text-xs); color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .comp-stats { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; flex-shrink: 0; }
+  .comp-stats .val { font-size: var(--text-xs); }
+  .trial-item { display: flex; align-items: flex-start; gap: 6px; padding: 5px 0; border-bottom: 1px solid var(--divider); }
+  .trial-item:last-child { border-bottom: none; }
+  .trial-title { font-size: var(--text-xs); color: var(--text-muted); line-height: 1.4; }
+  .hint-text { font-size: var(--text-sm); color: var(--text-muted); line-height: 1.6; }
+  .field-hint { display: block; font-size: var(--text-xs); color: var(--text-muted); margin-top: 3px; }
 
   .next-btn {
     margin-top: 24px;

@@ -1,0 +1,1108 @@
+{
+  "market": {
+    "cagr": 0.0364,
+    "focal_company": "TTK HEALTHCARE LTD",
+    "size_cr": 139.3,
+    "focal_brand": "VIRILEX",
+    "growth_rate": 0.0776,
+    "num_brands": 42,
+    "num_companies": 27,
+    "category": "SEX TONICS & STIMULANTS",
+    "awacs_code": "V3X2",
+    "category_segment": "Male sexual health / aphrodisiac / fertility",
+    "totals_cr": {
+      "dec17": 116.507,
+      "dec18": 128.72,
+      "dec19": 136.038,
+      "dec20": 129.27,
+      "dec21": 139.306
+    }
+  },
+  "brands": [
+    {
+      "brand": "TENTEX FORTE",
+      "company": "HIMALAYA DRUG COMPANY",
+      "skus": [
+        "TENTEX FORTE TABLET 10"
+      ],
+      "mat_val": {
+        "dec17": 15.468,
+        "dec18": 19.925,
+        "dec19": 21.997,
+        "dec20": 23.65,
+        "dec21": 25.389
+      },
+      "mat_units": {
+        "dec17": 3848.0,
+        "dec18": 4787.0,
+        "dec19": 4922.0,
+        "dec20": 4981.0,
+        "dec21": 4786.0
+      },
+      "cagr_20_21": 0.0735,
+      "total_5yr": 106.429,
+      "ms_dec21": 18.23
+    },
+    {
+      "brand": "CONFIDO",
+      "company": "HIMALAYA DRUG COMPANY",
+      "skus": [
+        "CONFIDO TABLET 60"
+      ],
+      "mat_val": {
+        "dec17": 15.637,
+        "dec18": 18.031,
+        "dec19": 18.098,
+        "dec20": 20.387,
+        "dec21": 21.177
+      },
+      "mat_units": {
+        "dec17": 2106.0,
+        "dec18": 2384.0,
+        "dec19": 2209.0,
+        "dec20": 2281.0,
+        "dec21": 2233.0
+      },
+      "cagr_20_21": 0.0388,
+      "total_5yr": 93.33,
+      "ms_dec21": 15.2
+    },
+    {
+      "brand": "ADDYZOA",
+      "company": "CHARAK PHARMA PVT LTD",
+      "skus": [
+        "ADDYZOA CAPSULE 20"
+      ],
+      "mat_val": {
+        "dec17": 10.838,
+        "dec18": 11.946,
+        "dec19": 11.565,
+        "dec20": 12.297,
+        "dec21": 13.05
+      },
+      "mat_units": {
+        "dec17": 987.0,
+        "dec18": 1063.0,
+        "dec19": 971.0,
+        "dec20": 994.0,
+        "dec21": 1006.0
+      },
+      "cagr_20_21": 0.0612,
+      "total_5yr": 59.696,
+      "ms_dec21": 9.37
+    },
+    {
+      "brand": "HIMCOLIN",
+      "company": "HIMALAYA DRUG COMPANY",
+      "skus": [
+        "HIMCOLIN GEL 30 GM"
+      ],
+      "mat_val": {
+        "dec17": 6.344,
+        "dec18": 10.231,
+        "dec19": 12.178,
+        "dec20": 10.321,
+        "dec21": 9.657
+      },
+      "mat_units": {
+        "dec17": 665.0,
+        "dec18": 1063.0,
+        "dec19": 1188.0,
+        "dec20": 938.0,
+        "dec21": 822.0
+      },
+      "cagr_20_21": -0.0643,
+      "total_5yr": 48.731,
+      "ms_dec21": 6.93
+    },
+    {
+      "brand": "SIOTONE",
+      "company": "ALBERT DAVID",
+      "skus": [
+        "SIOTONE CAPSULE 10"
+      ],
+      "mat_val": {
+        "dec17": 8.938,
+        "dec18": 8.325,
+        "dec19": 8.236,
+        "dec20": 6.394,
+        "dec21": 7.752
+      },
+      "mat_units": {
+        "dec17": 865.0,
+        "dec18": 832.0,
+        "dec19": 787.0,
+        "dec20": 581.0,
+        "dec21": 665.0
+      },
+      "cagr_20_21": 0.2124,
+      "total_5yr": 39.645,
+      "ms_dec21": 5.56
+    },
+    {
+      "brand": "ENDOBLOC T",
+      "company": "CIPLA LTD.",
+      "skus": [
+        "ENDOBLOC T KIT TABLET 10"
+      ],
+      "mat_val": {
+        "dec17": 1.786,
+        "dec18": 3.806,
+        "dec19": 4.72,
+        "dec20": 6.338,
+        "dec21": 7.33
+      },
+      "mat_units": {
+        "dec17": 15.0,
+        "dec18": 30.0,
+        "dec19": 36.0,
+        "dec20": 47.0,
+        "dec21": 54.0
+      },
+      "cagr_20_21": 0.1565,
+      "total_5yr": 23.98,
+      "ms_dec21": 5.26
+    },
+    {
+      "brand": "SPEMAN",
+      "company": "HIMALAYA DRUG COMPANY",
+      "skus": [
+        "SPEMAN TABLET 60"
+      ],
+      "mat_val": {
+        "dec17": 8.934,
+        "dec18": 8.96,
+        "dec19": 8.566,
+        "dec20": 8.028,
+        "dec21": 7.149
+      },
+      "mat_units": {
+        "dec17": 1095.0,
+        "dec18": 1086.0,
+        "dec19": 997.0,
+        "dec20": 865.0,
+        "dec21": 735.0
+      },
+      "cagr_20_21": -0.1095,
+      "total_5yr": 41.637,
+      "ms_dec21": 5.13
+    },
+    {
+      "brand": "NANO LEO",
+      "company": "SANZYME LTD",
+      "skus": [
+        "NANO LEO CAPSULE 15"
+      ],
+      "mat_val": {
+        "dec17": 5.118,
+        "dec18": 5.903,
+        "dec19": 6.209,
+        "dec20": 4.476,
+        "dec21": 7.008
+      },
+      "mat_units": {
+        "dec17": 127.0,
+        "dec18": 134.0,
+        "dec19": 141.0,
+        "dec20": 102.0,
+        "dec21": 139.0
+      },
+      "cagr_20_21": 0.5657,
+      "total_5yr": 28.714,
+      "ms_dec21": 5.03
+    },
+    {
+      "brand": "VIRILEX",
+      "company": "TTK HEALTHCARE LTD",
+      "skus": [
+        "VIRILEX TABLET 20"
+      ],
+      "mat_val": {
+        "dec17": 5.644,
+        "dec18": 5.552,
+        "dec19": 5.35,
+        "dec20": 5.331,
+        "dec21": 6.284
+      },
+      "mat_units": {
+        "dec17": 198.0,
+        "dec18": 179.0,
+        "dec19": 158.0,
+        "dec20": 143.0,
+        "dec21": 168.0
+      },
+      "cagr_20_21": 0.1788,
+      "total_5yr": 28.161,
+      "ms_dec21": 4.51
+    },
+    {
+      "brand": "ERACT X",
+      "company": "ZYDUS CADILA - ZHL",
+      "skus": [
+        "ERACT X SACHET 10 GM"
+      ],
+      "mat_val": {
+        "dec17": 0,
+        "dec18": 1.514,
+        "dec19": 5.66,
+        "dec20": 5.651,
+        "dec21": 6.049
+      },
+      "mat_units": {
+        "dec17": 0,
+        "dec18": 281.0,
+        "dec19": 1050.0,
+        "dec20": 1048.0,
+        "dec21": 991.0
+      },
+      "cagr_20_21": 0.0704,
+      "total_5yr": 18.874,
+      "ms_dec21": 4.34
+    },
+    {
+      "brand": "NEO",
+      "company": "CHARAK PHARMA PVT LTD",
+      "skus": [
+        "NEO TABLET 75"
+      ],
+      "mat_val": {
+        "dec17": 4.57,
+        "dec18": 4.904,
+        "dec19": 5.19,
+        "dec20": 4.88,
+        "dec21": 5.253
+      },
+      "mat_units": {
+        "dec17": 603.0,
+        "dec18": 625.0,
+        "dec19": 628.0,
+        "dec20": 574.0,
+        "dec21": 590.0
+      },
+      "cagr_20_21": 0.0764,
+      "total_5yr": 24.797,
+      "ms_dec21": 3.77
+    },
+    {
+      "brand": "SEMENTO",
+      "company": "AIMIL PHARMACEUTICAL (INDIA)",
+      "skus": [
+        "SEMENTO CAPSULE 20"
+      ],
+      "mat_val": {
+        "dec17": 0,
+        "dec18": 0,
+        "dec19": 1.579,
+        "dec20": 4.018,
+        "dec21": 4.196
+      },
+      "mat_units": {
+        "dec17": 0,
+        "dec18": 0,
+        "dec19": 97.0,
+        "dec20": 248.0,
+        "dec21": 239.0
+      },
+      "cagr_20_21": 0.0443,
+      "total_5yr": 9.793,
+      "ms_dec21": 3.01
+    },
+    {
+      "brand": "SHILAJIT",
+      "company": "DABUR INDIA LTD.",
+      "skus": [
+        "SHILAJIT CAPSULE 10",
+        "SHILAJIT CAPSULE 100",
+        "SHILAJIT CAPSULE 30",
+        "SHILAJIT CAPSULE 50",
+        "SHILAJIT GOLD CAPSULE 10",
+        "SHILAJIT GOLD CAPSULE 20"
+      ],
+      "mat_val": {
+        "dec17": 11.586,
+        "dec18": 7.012,
+        "dec19": 5.985,
+        "dec20": 3.162,
+        "dec21": 3.76
+      },
+      "mat_units": {
+        "dec17": 711.0,
+        "dec18": 446.0,
+        "dec19": 346.0,
+        "dec20": 174.0,
+        "dec21": 195.0
+      },
+      "cagr_20_21": 0.1891,
+      "total_5yr": 31.505,
+      "ms_dec21": 2.7
+    },
+    {
+      "brand": "NANO LEO TOTAL",
+      "company": "SANZYME LTD",
+      "skus": [
+        "NANO LEO TOTAL CAPSULE 10",
+        "NANO LEO TOTAL SACHET 3 GM"
+      ],
+      "mat_val": {
+        "dec17": 3.936,
+        "dec18": 4.131,
+        "dec19": 3.284,
+        "dec20": 1.952,
+        "dec21": 2.577
+      },
+      "mat_units": {
+        "dec17": 653.0,
+        "dec18": 723.0,
+        "dec19": 559.0,
+        "dec20": 368.0,
+        "dec21": 451.0
+      },
+      "cagr_20_21": 0.3202,
+      "total_5yr": 15.88,
+      "ms_dec21": 1.85
+    },
+    {
+      "brand": "CLIMAX",
+      "company": "MIDAS CARE PHARMACEUTICALS PVT LTD",
+      "skus": [
+        "CLIMAX SPRAY 15 GM"
+      ],
+      "mat_val": {
+        "dec17": 3.207,
+        "dec18": 3.642,
+        "dec19": 3.72,
+        "dec20": 2.605,
+        "dec21": 2.396
+      },
+      "mat_units": {
+        "dec17": 198.0,
+        "dec18": 234.0,
+        "dec19": 239.0,
+        "dec20": 167.0,
+        "dec21": 154.0
+      },
+      "cagr_20_21": -0.0802,
+      "total_5yr": 15.57,
+      "ms_dec21": 1.72
+    },
+    {
+      "brand": "EDRIVE C",
+      "company": "INNOVCARE LIFE SCIENCES PVT.LTD",
+      "skus": [
+        "EDRIVE C TABLET 10"
+      ],
+      "mat_val": {
+        "dec17": 0.867,
+        "dec18": 1.739,
+        "dec19": 2.231,
+        "dec20": 2.058,
+        "dec21": 2.251
+      },
+      "mat_units": {
+        "dec17": 32.0,
+        "dec18": 63.0,
+        "dec19": 72.0,
+        "dec20": 63.0,
+        "dec21": 67.0
+      },
+      "cagr_20_21": 0.0938,
+      "total_5yr": 9.146,
+      "ms_dec21": 1.62
+    },
+    {
+      "brand": "VIGOREX",
+      "company": "ZANDU PHARMACEUTICALS WORKS LTD",
+      "skus": [
+        "VIGOREX CAPSULE 10",
+        "VIGOREX CAPSULE 20"
+      ],
+      "mat_val": {
+        "dec17": 1.897,
+        "dec18": 2.038,
+        "dec19": 1.475,
+        "dec20": 0.993,
+        "dec21": 1.493
+      },
+      "mat_units": {
+        "dec17": 132.0,
+        "dec18": 139.0,
+        "dec19": 95.0,
+        "dec20": 61.0,
+        "dec21": 91.0
+      },
+      "cagr_20_21": 0.5035,
+      "total_5yr": 7.896,
+      "ms_dec21": 1.07
+    },
+    {
+      "brand": "EDRIVE",
+      "company": "INNOVCARE LIFE SCIENCES PVT.LTD",
+      "skus": [
+        "EDRIVE POWDER 15 GM"
+      ],
+      "mat_val": {
+        "dec17": 2.215,
+        "dec18": 2.297,
+        "dec19": 2.393,
+        "dec20": 1.436,
+        "dec21": 1.38
+      },
+      "mat_units": {
+        "dec17": 208.0,
+        "dec18": 214.0,
+        "dec19": 214.0,
+        "dec20": 122.0,
+        "dec21": 117.0
+      },
+      "cagr_20_21": -0.039,
+      "total_5yr": 9.721,
+      "ms_dec21": 0.99
+    },
+    {
+      "brand": "VIGOMAX",
+      "company": "CHARAK PHARMA PVT LTD",
+      "skus": [
+        "VIGOMAX CAPSULE 10",
+        "VIGOMAX CAPSULE 20",
+        "VIGOMAX FORTE TABLET 20"
+      ],
+      "mat_val": {
+        "dec17": 1.691,
+        "dec18": 1.66,
+        "dec19": 1.698,
+        "dec20": 1.544,
+        "dec21": 1.376
+      },
+      "mat_units": {
+        "dec17": 139.0,
+        "dec18": 129.0,
+        "dec19": 124.0,
+        "dec20": 109.0,
+        "dec21": 92.0
+      },
+      "cagr_20_21": -0.1088,
+      "total_5yr": 7.969,
+      "ms_dec21": 0.99
+    },
+    {
+      "brand": "IGNITOR ED",
+      "company": "ZYDUS CADILA - ZHL",
+      "skus": [
+        "IGNITOR ED SACHET 10 GM"
+      ],
+      "mat_val": {
+        "dec17": 1.498,
+        "dec18": 1.893,
+        "dec19": 1.463,
+        "dec20": 1.114,
+        "dec21": 0.97
+      },
+      "mat_units": {
+        "dec17": 287.0,
+        "dec18": 327.0,
+        "dec19": 235.0,
+        "dec20": 173.0,
+        "dec21": 137.0
+      },
+      "cagr_20_21": -0.1293,
+      "total_5yr": 6.938,
+      "ms_dec21": 0.7
+    },
+    {
+      "brand": "Y SPUR",
+      "company": "VILCO LABORATORIES PVT. LTD",
+      "skus": [
+        "Y SPUR CAPSULE 30"
+      ],
+      "mat_val": {
+        "dec17": 0.492,
+        "dec18": 0.605,
+        "dec19": 0.688,
+        "dec20": 0.67,
+        "dec21": 0.758
+      },
+      "mat_units": {
+        "dec17": 9.0,
+        "dec18": 10.0,
+        "dec19": 11.0,
+        "dec20": 10.0,
+        "dec21": 10.0
+      },
+      "cagr_20_21": 0.1313,
+      "total_5yr": 3.213,
+      "ms_dec21": 0.54
+    },
+    {
+      "brand": "PALLRYWYN",
+      "company": "CHARAK PHARMA PVT LTD",
+      "skus": [
+        "PALLRYWYN FORTE TABLET 20",
+        "PALLRYWYN TABLET 20"
+      ],
+      "mat_val": {
+        "dec17": 0.91,
+        "dec18": 0.627,
+        "dec19": 0.511,
+        "dec20": 0.386,
+        "dec21": 0.474
+      },
+      "mat_units": {
+        "dec17": 96.0,
+        "dec18": 57.0,
+        "dec19": 44.0,
+        "dec20": 31.0,
+        "dec21": 36.0
+      },
+      "cagr_20_21": 0.228,
+      "total_5yr": 2.908,
+      "ms_dec21": 0.34
+    },
+    {
+      "brand": "ENLARGE",
+      "company": "UNIVERSAL NUTRISCIENCE PVT LTD",
+      "skus": [
+        "ENLARGE FORTE SACHET 10 GM"
+      ],
+      "mat_val": {
+        "dec17": 1.714,
+        "dec18": 0.823,
+        "dec19": 0.742,
+        "dec20": 0.421,
+        "dec21": 0.327
+      },
+      "mat_units": {
+        "dec17": 209.0,
+        "dec18": 93.0,
+        "dec19": 77.0,
+        "dec20": 39.0,
+        "dec21": 27.0
+      },
+      "cagr_20_21": -0.2233,
+      "total_5yr": 4.027,
+      "ms_dec21": 0.23
+    },
+    {
+      "brand": "V TWO",
+      "company": "TTK HEALTHCARE LTD",
+      "skus": [
+        "V TWO 10 % GEL 10 GM",
+        "V TWO SACHET 15 GM"
+      ],
+      "mat_val": {
+        "dec17": 0.898,
+        "dec18": 1.007,
+        "dec19": 0.375,
+        "dec20": 0.07,
+        "dec21": 0.272
+      },
+      "mat_units": {
+        "dec17": 128.0,
+        "dec18": 141.0,
+        "dec19": 53.0,
+        "dec20": 9.0,
+        "dec21": 36.0
+      },
+      "cagr_20_21": 2.8857,
+      "total_5yr": 2.622,
+      "ms_dec21": 0.2
+    },
+    {
+      "brand": "LIBIDUP",
+      "company": "MMC PHARMACEUTICALS LTD",
+      "skus": [
+        "LIBIDUP SOFTGEL CAPSULE 15"
+      ],
+      "mat_val": {
+        "dec17": 0,
+        "dec18": 0.223,
+        "dec19": 0.239,
+        "dec20": 0.063,
+        "dec21": 0.268
+      },
+      "mat_units": {
+        "dec17": 0,
+        "dec18": 6.0,
+        "dec19": 6.0,
+        "dec20": 2.0,
+        "dec21": 6.0
+      },
+      "cagr_20_21": 3.254,
+      "total_5yr": 0.793,
+      "ms_dec21": 0.19
+    },
+    {
+      "brand": "VIGORVIT FORTE",
+      "company": "INDSWIFT LABORATORIES LTD.",
+      "skus": [
+        "VIGORVIT FORTE CAPSULE 10"
+      ],
+      "mat_val": {
+        "dec17": 0.41,
+        "dec18": 0.428,
+        "dec19": 0.441,
+        "dec20": 0.3,
+        "dec21": 0.218
+      },
+      "mat_units": {
+        "dec17": 33.0,
+        "dec18": 36.0,
+        "dec19": 37.0,
+        "dec20": 25.0,
+        "dec21": 19.0
+      },
+      "cagr_20_21": -0.2733,
+      "total_5yr": 1.797,
+      "ms_dec21": 0.16
+    },
+    {
+      "brand": "VIGOREX SF",
+      "company": "ZANDU PHARMACEUTICALS WORKS LTD",
+      "skus": [
+        "VIGOREX SF CAPSULE 15"
+      ],
+      "mat_val": {
+        "dec17": 0.137,
+        "dec18": 0.139,
+        "dec19": 0.144,
+        "dec20": 0.098,
+        "dec21": 0.193
+      },
+      "mat_units": {
+        "dec17": 10.0,
+        "dec18": 9.0,
+        "dec19": 9.0,
+        "dec20": 6.0,
+        "dec21": 12.0
+      },
+      "cagr_20_21": 0.9694,
+      "total_5yr": 0.711,
+      "ms_dec21": 0.14
+    },
+    {
+      "brand": "SENSA ED",
+      "company": "VILCO LABORATORIES PVT. LTD",
+      "skus": [
+        "SENSA ED CAPSULE 10"
+      ],
+      "mat_val": {
+        "dec17": 0.111,
+        "dec18": 0.113,
+        "dec19": 0.121,
+        "dec20": 0.068,
+        "dec21": 0.092
+      },
+      "mat_units": {
+        "dec17": 7.0,
+        "dec18": 6.0,
+        "dec19": 7.0,
+        "dec20": 3.0,
+        "dec21": 4.0
+      },
+      "cagr_20_21": 0.3529,
+      "total_5yr": 0.505,
+      "ms_dec21": 0.07
+    },
+    {
+      "brand": "COMMANDO (NEOVEDIC)",
+      "company": "NEO VEDIC DRUG PHARMA",
+      "skus": [
+        "COMMANDO (NEOVEDIC) CAPSULE 20",
+        "COMMANDO (NEOVEDIC) OIL 15 ML"
+      ],
+      "mat_val": {
+        "dec17": 0.223,
+        "dec18": 0.259,
+        "dec19": 0.408,
+        "dec20": 0.225,
+        "dec21": 0.076
+      },
+      "mat_units": {
+        "dec17": 32.0,
+        "dec18": 34.0,
+        "dec19": 46.0,
+        "dec20": 24.0,
+        "dec21": 9.0
+      },
+      "cagr_20_21": -0.6622,
+      "total_5yr": 1.191,
+      "ms_dec21": 0.05
+    },
+    {
+      "brand": "VIVADONA",
+      "company": "CHARAK PHARMA PVT LTD",
+      "skus": [
+        "VIVADONA CAPSULE 20"
+      ],
+      "mat_val": {
+        "dec17": 0.135,
+        "dec18": 0.134,
+        "dec19": 0.115,
+        "dec20": 0.054,
+        "dec21": 0.051
+      },
+      "mat_units": {
+        "dec17": 11.0,
+        "dec18": 11.0,
+        "dec19": 9.0,
+        "dec20": 4.0,
+        "dec21": 4.0
+      },
+      "cagr_20_21": -0.0556,
+      "total_5yr": 0.489,
+      "ms_dec21": 0.04
+    },
+    {
+      "brand": "VALIDO PLUS",
+      "company": "UNIVERSAL MEDIKIT",
+      "skus": [
+        "VALIDO PLUS CAPSULE 10",
+        "VALIDO PLUS CAPSULE 60"
+      ],
+      "mat_val": {
+        "dec17": 0.028,
+        "dec18": 0.018,
+        "dec19": 0.049,
+        "dec20": 0.009,
+        "dec21": 0.024
+      },
+      "mat_units": {
+        "dec17": 2.0,
+        "dec18": 1.0,
+        "dec19": 2.0,
+        "dec20": 0.0,
+        "dec21": 1.0
+      },
+      "cagr_20_21": 1.6667,
+      "total_5yr": 0.128,
+      "ms_dec21": 0.02
+    },
+    {
+      "brand": "NEO MT",
+      "company": "DIAL PHARMACEUTICALS PVT. LTD.",
+      "skus": [
+        "NEO MT TABLET 6"
+      ],
+      "mat_val": {
+        "dec17": 0.006,
+        "dec18": 0.008,
+        "dec19": 0.009,
+        "dec20": 0.014,
+        "dec21": 0.018
+      },
+      "mat_units": {
+        "dec17": 1.0,
+        "dec18": 2.0,
+        "dec19": 2.0,
+        "dec20": 3.0,
+        "dec21": 4.0
+      },
+      "cagr_20_21": 0.2857,
+      "total_5yr": 0.055,
+      "ms_dec21": 0.01
+    },
+    {
+      "brand": "EROTICAN",
+      "company": "SANAT PRODUCTS LTD",
+      "skus": [
+        "EROTICAN CAPSULE 10"
+      ],
+      "mat_val": {
+        "dec17": 0,
+        "dec18": 0,
+        "dec19": 0.099,
+        "dec20": 0.039,
+        "dec21": 0.013
+      },
+      "mat_units": {
+        "dec17": 0,
+        "dec18": 0,
+        "dec19": 6.0,
+        "dec20": 2.0,
+        "dec21": 1.0
+      },
+      "cagr_20_21": -0.6667,
+      "total_5yr": 0.151,
+      "ms_dec21": 0.01
+    },
+    {
+      "brand": "EVACTIVE",
+      "company": "RPG LIFE SCIENCES LTD.",
+      "skus": [
+        "EVACTIVE TABLET 10"
+      ],
+      "mat_val": {
+        "dec17": 0.206,
+        "dec18": 0.044,
+        "dec19": 0.001,
+        "dec20": 0,
+        "dec21": 0.013
+      },
+      "mat_units": {
+        "dec17": 18.0,
+        "dec18": 4.0,
+        "dec19": 0.0,
+        "dec20": 0,
+        "dec21": 0.0
+      },
+      "cagr_20_21": 0,
+      "total_5yr": 0.264,
+      "ms_dec21": 0.01
+    },
+    {
+      "brand": "AJAR",
+      "company": "CONCEPT PHARMACEUTICALS LTD",
+      "skus": [
+        "AJAR CAPSULE 10"
+      ],
+      "mat_val": {
+        "dec17": 0.012,
+        "dec18": 0.016,
+        "dec19": 0.008,
+        "dec20": 0.001,
+        "dec21": 0.005
+      },
+      "mat_units": {
+        "dec17": 2.0,
+        "dec18": 3.0,
+        "dec19": 2.0,
+        "dec20": 0.0,
+        "dec21": 1.0
+      },
+      "cagr_20_21": 4.0,
+      "total_5yr": 0.042,
+      "ms_dec21": 0.0
+    },
+    {
+      "brand": "UNILACT",
+      "company": "UNI LABS",
+      "skus": [
+        "UNILACT GRANULES 200 GM",
+        "UNILACT TABLET 10",
+        "UNILACT TABLET 30"
+      ],
+      "mat_val": {
+        "dec17": 0.028,
+        "dec18": 0.029,
+        "dec19": 0.023,
+        "dec20": 0.017,
+        "dec21": 0.004
+      },
+      "mat_units": {
+        "dec17": 6.0,
+        "dec18": 7.0,
+        "dec19": 5.0,
+        "dec20": 4.0,
+        "dec21": 1.0
+      },
+      "cagr_20_21": -0.7647,
+      "total_5yr": 0.101,
+      "ms_dec21": 0.0
+    },
+    {
+      "brand": "BIG BOSS PLUS",
+      "company": "TTK HEALTHCARE LTD",
+      "skus": [
+        "BIG BOSS PLUS TABLET 10"
+      ],
+      "mat_val": {
+        "dec17": 0,
+        "dec18": 0.009,
+        "dec19": 0.004,
+        "dec20": 0.006,
+        "dec21": 0.003
+      },
+      "mat_units": {
+        "dec17": 0,
+        "dec18": 2.0,
+        "dec19": 1.0,
+        "dec20": 1.0,
+        "dec21": 1.0
+      },
+      "cagr_20_21": -0.5,
+      "total_5yr": 0.022,
+      "ms_dec21": 0.0
+    },
+    {
+      "brand": "MANIX",
+      "company": "WOCKHARDT LTD",
+      "skus": [
+        "MANIX CAPSULE 10"
+      ],
+      "mat_val": {
+        "dec17": 0.735,
+        "dec18": 0.686,
+        "dec19": 0.413,
+        "dec20": 0.185,
+        "dec21": 0.0
+      },
+      "mat_units": {
+        "dec17": 58.0,
+        "dec18": 54.0,
+        "dec19": 31.0,
+        "dec20": 14.0,
+        "dec21": 0.0
+      },
+      "cagr_20_21": -1.0,
+      "total_5yr": 2.019,
+      "ms_dec21": 0.0
+    },
+    {
+      "brand": "COMMANDO",
+      "company": "NEON LABORATORIES LTD",
+      "skus": [
+        "COMMANDO CREAM 1 GM"
+      ],
+      "mat_val": {
+        "dec17": 0.022,
+        "dec18": 0.023,
+        "dec19": 0.031,
+        "dec20": 0.007,
+        "dec21": 0
+      },
+      "mat_units": {
+        "dec17": 2.0,
+        "dec18": 2.0,
+        "dec19": 2.0,
+        "dec20": 1.0,
+        "dec21": 0
+      },
+      "cagr_20_21": -1.0,
+      "total_5yr": 0.083,
+      "ms_dec21": 0.0
+    },
+    {
+      "brand": "SEDUZ",
+      "company": "PHARMED LTD",
+      "skus": [
+        "SEDUZ CAPSULE 10"
+      ],
+      "mat_val": {
+        "dec17": 0.045,
+        "dec18": 0.0,
+        "dec19": 0,
+        "dec20": 0,
+        "dec21": 0
+      },
+      "mat_units": {
+        "dec17": 4.0,
+        "dec18": 0.0,
+        "dec19": 0,
+        "dec20": 0,
+        "dec21": 0
+      },
+      "cagr_20_21": 0,
+      "total_5yr": 0.045,
+      "ms_dec21": 0.0
+    },
+    {
+      "brand": "ATTOM",
+      "company": "SYNCOM FORMULATIONS (I) LIMITED",
+      "skus": [
+        "ATTOM CAPSULE 10",
+        "ATTOM OIL 15 ML"
+      ],
+      "mat_val": {
+        "dec17": 0.048,
+        "dec18": 0.02,
+        "dec19": 0.02,
+        "dec20": 0.002,
+        "dec21": 0
+      },
+      "mat_units": {
+        "dec17": 5.0,
+        "dec18": 1.0,
+        "dec19": 2.0,
+        "dec20": 0.0,
+        "dec21": 0
+      },
+      "cagr_20_21": -1.0,
+      "total_5yr": 0.09,
+      "ms_dec21": 0.0
+    },
+    {
+      "brand": "IGNITOR",
+      "company": "ZYDUS CADILA - ZHL",
+      "skus": [
+        "IGNITOR TABLET 10"
+      ],
+      "mat_val": {
+        "dec17": 0.173,
+        "dec18": 0,
+        "dec19": 0,
+        "dec20": 0,
+        "dec21": 0
+      },
+      "mat_units": {
+        "dec17": 9.0,
+        "dec18": 0,
+        "dec19": 0,
+        "dec20": 0,
+        "dec21": 0
+      },
+      "cagr_20_21": 0,
+      "total_5yr": 0.173,
+      "ms_dec21": 0.0
+    }
+  ],
+  "doctor_universe": {
+    "Endocrinologist": 8500,
+    "GP": 50000,
+    "CP": 41000,
+    "Chest Physician": 6000,
+    "Internal Medicine": 60000,
+    "Pulmonologist": 4000,
+    "ENT": 6000,
+    "Urologist": 5200,
+    "Dermatologist": 4500,
+    "Rheumatologist": 1400,
+    "Oncologist": 1396,
+    "Gynecologist": 37000,
+    "Pediatrician": 12000,
+    "Allergist": 285,
+    "Orthopaedist": 17000
+  },
+  "environment": {
+    "india": {
+      "population_bn": 1.44,
+      "gdp_tr_usd": 27.36,
+      "gdp_growth_pct": 7.3,
+      "gni_per_capita": 8230,
+      "urban_pct": 36.8,
+      "rural_pct": 63.2,
+      "pharma_market_bn_usd": 54.6,
+      "pharma_growth_pct": 12.3,
+      "ip_strength": "Strong",
+      "reimbursement": "Primarily Out-of-Pocket (>30%)",
+      "innovator_vs_generic": "Balanced"
+    }
+  },
+  "patient_funnel_reference": [
+    {
+      "level": 1,
+      "description": "No. of patients living with the disease",
+      "nos_mn": 2000.0
+    },
+    {
+      "level": 2,
+      "description": "No. of patients diagnosed with the disease",
+      "nos_mn": 1600.0
+    },
+    {
+      "level": 3,
+      "description": "No. of Patients treated",
+      "nos_mn": 1120.0
+    },
+    {
+      "level": 4,
+      "description": "Target Patients",
+      "nos_mn": 560.0
+    }
+  ],
+  "market_definition_reference": {
+    "SEX TONICS & STIMULANTS | V3X2": "Market definition can also be described as category definition e.g. Type 2 Diabetes oral market/Acid peptic disorder, choice is to be made by what you feel that product, molecule from the same or different class compete with one another",
+    "~139 Cr Growth Rate 8%": "What is the size (AWACS) Growth MAT XXX",
+    "(Name)": "\u2022 Key molecules and drug classes",
+    "Cardiologist": "\u2022 Which are the top most specialities in the market in terms of total prescriptions as welll as PD ration",
+    "2000000000": "What is the actual universe of patients living with disease mentioned"
+  }
+}

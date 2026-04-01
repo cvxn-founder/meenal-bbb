@@ -1,44 +1,54 @@
 <script>
+  import { onMount } from 'svelte';
   import StepHeader from '$lib/components/StepHeader.svelte';
   import AiPanel from '$lib/components/AiPanel.svelte';
   import DataCard from '$lib/components/DataCard.svelte';
   import { wizardState, saveState, resetWizard } from '$lib/store.svelte.js';
+  import { getTopBrands, getMarketMeta } from '$lib/backend.js';
   import { analyzeStep, formatNarrative } from '$lib/ai.js';
 
   let s = $derived(wizardState.steps.step12);
   let s1 = $derived(wizardState.steps.step1);
   let aiLoading = $state(false);
 
-  function updateData(value) {
-    wizardState.steps.step12.awacsData = value;
-    saveState();
-  }
+  // Bundled AWACS data (auto-loaded)
+  let bundledBrands = $state([]);
+  let mktMeta = $state(null);
+  let useBundle = $state(true);   // toggle: bundled vs manual paste
 
-  let parsedLeaderboard = $derived(() => {
-    if (!s.awacsData.trim()) return [];
-    return s.awacsData.trim().split('\n')
-      .map((line, i) => {
-        const parts = line.split('\t').length > 1 ? line.split('\t') : line.split(',');
+  onMount(async () => {
+    [bundledBrands, mktMeta] = await Promise.all([getTopBrands(15), getMarketMeta()]);
+  });
+
+  // Leaderboard: either bundled data or parsed from manual paste
+  let leaderboard = $derived(useBundle
+    ? bundledBrands.map((b, i) => ({
+        rank: i + 1,
+        brand: b.brand,
+        company: b.company,
+        sku: b.skus?.[0] || '',
+        mat17: b.mat_val?.dec17 ?? 0,
+        mat18: b.mat_val?.dec18 ?? 0,
+        mat19: b.mat_val?.dec19 ?? 0,
+        mat20: b.mat_val?.dec20 ?? 0,
+        mat21: b.mat_val?.dec21 ?? 0,
+        ms: b.ms_dec21 ?? 0,
+        cagr: b.cagr_20_21 ?? 0
+      }))
+    : (s.awacsData?.trim() ? s.awacsData.trim().split('\n').map((line, i) => {
+        const p = line.split('\t').length > 1 ? line.split('\t') : line.split(',');
         return {
-          rank: i + 1,
-          brand: parts[0]?.trim() || '',
-          company: parts[1]?.trim() || '',
-          sku: parts[2]?.trim() || '',
-          mat1: parts[3]?.trim() || '',
-          mat2: parts[4]?.trim() || '',
-          mat3: parts[5]?.trim() || '',
-          mat4: parts[6]?.trim() || '',
-          mat5: parts[7]?.trim() || '',
-          cagr: parts[8]?.trim() || ''
+          rank: i+1, brand: p[0]?.trim()||'', company: p[1]?.trim()||'',
+          sku: p[2]?.trim()||'',
+          mat17: parseFloat(p[3])||0, mat18: parseFloat(p[4])||0,
+          mat19: parseFloat(p[5])||0, mat20: parseFloat(p[6])||0,
+          mat21: parseFloat(p[7])||0,
+          ms: parseFloat(p[8])||0, cagr: 0
         };
-      })
-      .filter(r => r.brand);
-  });
+      }).filter(r => r.brand) : [])
+  );
 
-  let maxVal = $derived(() => {
-    const vals = parsedLeaderboard().map(r => parseFloat(r.mat5) || 0);
-    return Math.max(...vals, 1);
-  });
+  let maxVal = $derived(Math.max(...leaderboard.map(r => r.mat21), 1));
 
   function isOurBrand(brand) {
     return s1.brandName && brand.toLowerCase().includes(s1.brandName.toLowerCase());
@@ -48,7 +58,12 @@
     aiLoading = true;
     try {
       const narrative = await analyzeStep(12, 'Market Position Analysis', wizardState.steps, {
-        leaderboard: parsedLeaderboard()
+        leaderboard: leaderboard.slice(0, 12).map(r => ({
+          brand: r.brand, company: r.company,
+          mat_dec21: r.mat21, market_share: r.ms,
+          yoy_growth: r.cagr
+        })),
+        marketMeta: mktMeta
       });
       wizardState.steps.step12.aiNarrative = formatNarrative(narrative);
       saveState();
@@ -58,40 +73,34 @@
       aiLoading = false;
     }
   }
-
-  const SAMPLE_DATA = `Brand A\tCompany X\t3\t45.2\t48.6\t52.1\t56.8\t61.3\t7.9%
-Brand B\tCompany Y\t2\t38.1\t40.2\t43.8\t45.1\t48.2\t6.1%
-Brand C\tCompany Z\t4\t22.4\t24.1\t26.3\t27.8\t30.1\t7.7%
-VIRILEX\tTTK Healthcare\t2\t10.2\t11.8\t12.4\t13.6\t14.9\t10.0%
-Brand E\tCompany W\t1\t8.9\t9.2\t9.8\t10.1\t10.5\t4.2%`;
-
-  function loadSample() {
-    wizardState.steps.step12.awacsData = SAMPLE_DATA;
-    saveState();
-  }
 </script>
 
 <StepHeader stepNum={12} title="AWACS / Market View" subtitle="Market leaderboard and competitive position analysis" />
 
 <div class="step-body">
   <div class="data-panel scrollable">
-    <DataCard title="Market Share Chart">
-      {#if parsedLeaderboard().length > 0}
+    <DataCard title="Market Share (Dec '21)">
+      {#if mktMeta}
+        <div class="data-row" style="margin-bottom:8px">
+          <span class="key">Total V3X2</span>
+          <span class="val accent">Rs. {mktMeta.size_cr} Cr</span>
+        </div>
+      {/if}
+      {#if leaderboard.length > 0}
         <div class="share-chart">
-          {#each parsedLeaderboard() as row}
-            {@const val = parseFloat(row.mat5) || 0}
-            {@const pct = (val / maxVal()) * 100}
+          {#each leaderboard.slice(0,10) as row}
+            {@const pct = (row.mat21 / maxVal) * 100}
             <div class="share-row" class:our-brand={isOurBrand(row.brand)}>
               <div class="share-brand">{row.brand}</div>
               <div class="share-bar-wrap">
-                <div class="share-bar" style="width: {pct}%"></div>
-                <span class="share-val">{row.mat5 || '—'}</span>
+                <div class="share-bar" style="width:{pct}%"></div>
+                <span class="share-val">{row.mat21} Cr</span>
               </div>
             </div>
           {/each}
         </div>
       {:else}
-        <p class="hint-text">Paste AWACS data on the right to see the market share chart.</p>
+        <p class="hint-text">Loading market data...</p>
       {/if}
     </DataCard>
 
@@ -106,23 +115,30 @@ Brand E\tCompany W\t1\t8.9\t9.2\t9.8\t10.1\t10.5\t4.2%`;
   </div>
 
   <div class="input-panel scrollable">
-    <div class="section-title">AWACS Data Input</div>
-    <p class="hint">Paste tab-separated or comma-separated data: Brand, Company, SKU, MAT Y1, MAT Y2, MAT Y3, MAT Y4, MAT Y5, CAGR</p>
 
-    <div class="data-actions">
-      <button onclick={loadSample} style="font-size: var(--text-xs);">Load Sample Data</button>
+    <div class="toggle-row">
+      <button class="toggle-btn" class:active={useBundle} onclick={() => useBundle = true}>
+        AWACS Data (bundled)
+      </button>
+      <button class="toggle-btn" class:active={!useBundle} onclick={() => useBundle = false}>
+        Paste custom data
+      </button>
     </div>
 
-    <textarea
-      value={s.awacsData}
-      oninput={e => updateData(e.target.value)}
-      placeholder="Brand A	Company X	3	45.2	48.6	52.1	56.8	61.3	7.9%&#10;Brand B	Company Y	2	38.1	40.2	43.8	45.1	48.2	6.1%"
-      rows="8"
-      style="font-family: monospace; font-size: var(--text-xs);"
-    ></textarea>
+    {#if !useBundle}
+      <div class="section-title">Paste AWACS Data</div>
+      <p class="hint">Tab or comma-separated: Brand, Company, SKU, MAT'17, MAT'18, MAT'19, MAT'20, MAT'21, MS%</p>
+      <textarea
+        value={s.awacsData}
+        oninput={e => { wizardState.steps.step12.awacsData = e.target.value; saveState(); }}
+        placeholder="TENTEX FORTE	HIMALAYA	TENTEX FORTE TABLET 10	15.47	19.92	22.0	23.65	25.39	18.2"
+        rows="8"
+        style="font-family: monospace; font-size: var(--text-xs);"
+      ></textarea>
+    {/if}
 
-    {#if parsedLeaderboard().length > 0}
-      <div class="section-title" style="margin-top: 20px;">Market Leaderboard</div>
+    {#if leaderboard.length > 0}
+      <div class="section-title" style="margin-top: 20px;">Market Leaderboard (V3X2 — MAT Cr)</div>
 
       <div class="table-wrap">
         <table>
@@ -131,29 +147,25 @@ Brand E\tCompany W\t1\t8.9\t9.2\t9.8\t10.1\t10.5\t4.2%`;
               <th>#</th>
               <th>Brand</th>
               <th>Company</th>
-              <th>SKU</th>
-              <th>MAT Y1</th>
-              <th>MAT Y2</th>
-              <th>MAT Y3</th>
-              <th>MAT Y4</th>
-              <th>MAT Y5</th>
-              <th>CAGR</th>
+              <th>'17</th><th>'18</th><th>'19</th><th>'20</th><th>'21</th>
+              <th>MS%</th>
+              <th>YoY</th>
             </tr>
           </thead>
           <tbody>
-            {#each parsedLeaderboard() as row}
+            {#each leaderboard as row}
               <tr class:our-brand-row={isOurBrand(row.brand)}>
                 <td style="color:var(--text-muted)">{row.rank}</td>
-                <td style="font-weight:500">{row.brand} {isOurBrand(row.brand) ? '★' : ''}</td>
+                <td style="font-weight:500">{row.brand}{isOurBrand(row.brand) ? ' ★' : ''}</td>
                 <td style="color:var(--text-muted)">{row.company}</td>
-                <td style="color:var(--text-muted); text-align:center">{row.sku}</td>
-                <td>{row.mat1}</td>
-                <td>{row.mat2}</td>
-                <td>{row.mat3}</td>
-                <td>{row.mat4}</td>
-                <td style="font-weight:500; color:var(--accent)">{row.mat5}</td>
+                <td style="color:var(--text-muted); font-size:var(--text-xs)">{row.mat17 || '—'}</td>
+                <td style="color:var(--text-muted); font-size:var(--text-xs)">{row.mat18 || '—'}</td>
+                <td style="color:var(--text-muted); font-size:var(--text-xs)">{row.mat19 || '—'}</td>
+                <td style="color:var(--text-muted); font-size:var(--text-xs)">{row.mat20 || '—'}</td>
+                <td style="font-weight:500; color:var(--accent)">{row.mat21}</td>
+                <td>{row.ms}%</td>
                 <td>
-                  <span class="badge {parseFloat(row.cagr) > 8 ? 'green' : parseFloat(row.cagr) > 4 ? 'amber' : 'red'}">{row.cagr}</span>
+                  <span class="badge {row.cagr > 0.08 ? 'green' : row.cagr > 0.02 ? 'amber' : 'red'}">{row.cagr >= 0 ? '+' : ''}{(row.cagr*100).toFixed(1)}%</span>
                 </td>
               </tr>
             {/each}
@@ -199,6 +211,18 @@ Brand E\tCompany W\t1\t8.9\t9.2\t9.8\t10.1\t10.5\t4.2%`;
     font-size: var(--text-sm);
     color: var(--text-muted);
     line-height: 1.6;
+  }
+
+  .toggle-row {
+    display: flex; gap: 8px; margin-bottom: 16px;
+  }
+  .toggle-btn {
+    padding: 6px 14px; font-size: var(--text-sm); font-family: inherit;
+    border-radius: 8px; border: 1px solid var(--button-border);
+    background: var(--button-bg); color: var(--text-muted); cursor: pointer;
+  }
+  .toggle-btn.active {
+    background: var(--accent-muted); border-color: var(--accent); color: var(--accent);
   }
 
   .data-actions {

@@ -1,12 +1,20 @@
 <script>
+  import { onMount } from 'svelte';
   import StepHeader from '$lib/components/StepHeader.svelte';
   import DataCard from '$lib/components/DataCard.svelte';
   import AiPanel from '$lib/components/AiPanel.svelte';
   import { wizardState, saveState, advanceStep } from '$lib/store.svelte.js';
+  import { getEnvironmentData, getMarketMeta } from '$lib/backend.js';
   import { analyzeStep, formatNarrative } from '$lib/ai.js';
 
   let s = $derived(wizardState.steps.step2);
   let aiLoading = $state(false);
+  let envData = $state(null);
+  let mktData = $state(null);
+
+  onMount(async () => {
+    [envData, mktData] = await Promise.all([getEnvironmentData(), getMarketMeta()]);
+  });
 
   function update(field, value) {
     wizardState.steps.step2[field] = value;
@@ -25,14 +33,8 @@
     aiLoading = true;
     try {
       const narrative = await analyzeStep(2, 'Environment Understanding', wizardState.steps, {
-        indiaData: {
-          population: '1.44Bn',
-          gdp: '$27.36Tr (7.3% growth)',
-          pharmaMarket: '$54.6Bn (12.3% growth)',
-          urban: '36.8%',
-          rural: '63.2%',
-          gniPerCapita: '$8,230'
-        }
+        indiaData: envData,
+        marketData: mktData
       });
       wizardState.steps.step2.aiNarrative = formatNarrative(narrative);
       saveState();
@@ -48,18 +50,28 @@
 
 <div class="step-body">
   <div class="data-panel scrollable">
-    <DataCard title="India Pharma Market">
-      <div class="data-row"><span class="key">Population</span><span class="val">1.44 Bn</span></div>
-      <div class="data-row"><span class="key">GDP</span><span class="val">$27.36 Tr</span></div>
-      <div class="data-row"><span class="key">GDP Growth</span><span class="val badge green">7.3%</span></div>
-      <div class="data-row"><span class="key">Pharma Market</span><span class="val">$54.6 Bn</span></div>
-      <div class="data-row"><span class="key">Pharma Growth</span><span class="val badge green">12.3%</span></div>
-      <div class="data-row"><span class="key">Urban Population</span><span class="val">36.8%</span></div>
-      <div class="data-row"><span class="key">Rural Population</span><span class="val">63.2%</span></div>
-      <div class="data-row"><span class="key">GNI per Capita</span><span class="val">$8,230</span></div>
-      <div class="data-row"><span class="key">IP Protection</span><span class="val badge green">Strong</span></div>
+    <DataCard title="India Pharma Macro">
+      <div class="data-row"><span class="key">Population</span><span class="val">{envData?.population_bn ?? 1.44} Bn</span></div>
+      <div class="data-row"><span class="key">GDP</span><span class="val">${envData?.gdp_tr_usd ?? 27.36} Tr</span></div>
+      <div class="data-row"><span class="key">GDP Growth</span><span class="val badge green">{envData?.gdp_growth_pct ?? 7.3}%</span></div>
+      <div class="data-row"><span class="key">Pharma Market</span><span class="val">${envData?.pharma_market_bn_usd ?? 54.6} Bn</span></div>
+      <div class="data-row"><span class="key">Pharma Growth</span><span class="val badge green">{envData?.pharma_growth_pct ?? 12.3}%</span></div>
+      <div class="data-row"><span class="key">Urban</span><span class="val">{envData?.urban_pct ?? 36.8}%</span></div>
+      <div class="data-row"><span class="key">Rural</span><span class="val">{envData?.rural_pct ?? 63.2}%</span></div>
+      <div class="data-row"><span class="key">GNI per Capita</span><span class="val">${envData?.gni_per_capita ?? 8230}</span></div>
+      <div class="data-row"><span class="key">IP Protection</span><span class="val badge green">{envData?.ip_strength ?? 'Strong'}</span></div>
       <div class="data-row"><span class="key">Reimbursement</span><span class="val badge amber">OOP &gt;30%</span></div>
     </DataCard>
+    {#if mktData}
+    <DataCard title="V3X2 Category (AWACS)">
+      <div class="data-row"><span class="key">Category</span><span class="val">{mktData.category}</span></div>
+      <div class="data-row"><span class="key">Market Size</span><span class="val accent">Rs. {mktData.size_cr} Cr</span></div>
+      <div class="data-row"><span class="key">Growth Rate</span><span class="val badge green">{(mktData.growth_rate*100).toFixed(1)}%</span></div>
+      <div class="data-row"><span class="key">CAGR (5yr)</span><span class="val">{(mktData.cagr*100).toFixed(1)}%</span></div>
+      <div class="data-row"><span class="key">Brands</span><span class="val">{mktData.num_brands}</span></div>
+      <div class="data-row"><span class="key">Companies</span><span class="val">{mktData.num_companies}</span></div>
+    </DataCard>
+    {/if}
 
     <DataCard title="AI Insights">
       <AiPanel
