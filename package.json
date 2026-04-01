@@ -1,0 +1,5 @@
+{
+  "name": "bbb",
+  "private": true,
+  "workspaces": ["apps/frontend", "workers/bbb-worker"]
+}
