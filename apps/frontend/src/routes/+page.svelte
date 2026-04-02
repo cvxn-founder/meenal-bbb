@@ -1,4 +1,108 @@
 <script>
+  import { onMount } from 'svelte';
+
+  let svgEl;
+
+  onMount(async () => {
+    const d3 = await import('d3');
+
+    const W = svgEl.clientWidth || 900;
+    const H = 440;
+    const cx = W / 2;
+    const cy = H / 2;
+    const R = Math.min(W * 0.36, 175);
+
+    const outer = [
+      { label: 'IQVIA AWACS',       sub: 'V3X2 · 42 brands · 5yr MAT',    a: -90  },
+      { label: 'ClinicalTrials.gov', sub: '563,000 indexed trials',         a: -30  },
+      { label: 'PubMed',             sub: '28M publications',               a:  30  },
+      { label: 'HCP Universe',       sub: '132K doctors indexed',           a:  90  },
+      { label: 'Qwen AI',            sub: 'Narrative generation',           a:  150 },
+      { label: 'GraphQL API',        sub: '88 resolvers · real-time',       a: -150 },
+    ];
+
+    outer.forEach(n => {
+      const rad = (n.a * Math.PI) / 180;
+      n.x = cx + R * Math.cos(rad);
+      n.y = cy + R * Math.sin(rad);
+    });
+
+    const bezier = n => {
+      const dx = n.x - cx, dy = n.y - cy;
+      const len = Math.sqrt(dx * dx + dy * dy);
+      const px = (-dy / len) * 36, py = (dx / len) * 36;
+      const c1x = cx + dx * 0.32 + px, c1y = cy + dy * 0.32 + py;
+      const c2x = cx + dx * 0.68 + px, c2y = cy + dy * 0.68 + py;
+      return `M${cx},${cy} C${c1x},${c1y} ${c2x},${c2y} ${n.x},${n.y}`;
+    };
+
+    const labelAnchor = n =>
+      n.x < cx - 20 ? 'end' : n.x > cx + 20 ? 'start' : 'middle';
+    const labelDx = n =>
+      n.x < cx - 20 ? -14 : n.x > cx + 20 ? 14 : 0;
+    const labelDy1 = n => n.y < cy - 20 ? -16 : n.y > cy + 20 ? 20 : -6;
+    const labelDy2 = n => n.y < cy - 20 ? -2  : n.y > cy + 20 ? 34 : 8;
+
+    const svg = d3.select(svgEl)
+      .attr('viewBox', `0 0 ${W} ${H}`)
+      .attr('width', W)
+      .attr('height', H);
+
+    // Bezier edges
+    svg.selectAll('.edge')
+      .data(outer).enter()
+      .append('path')
+      .attr('d', bezier)
+      .attr('fill', 'none')
+      .attr('stroke', '#d4d4d4')
+      .attr('stroke-width', 1.2);
+
+    // Outer node dots
+    const g = svg.selectAll('.onode')
+      .data(outer).enter()
+      .append('g')
+      .attr('transform', n => `translate(${n.x},${n.y})`);
+
+    g.append('circle')
+      .attr('r', 5)
+      .attr('fill', '#fff')
+      .attr('stroke', '#a3a3a3')
+      .attr('stroke-width', 1.5);
+
+    // Main label
+    g.append('text')
+      .attr('text-anchor', labelAnchor)
+      .attr('dx', labelDx)
+      .attr('dy', labelDy1)
+      .style('font-size', '12.5px')
+      .style('font-weight', '500')
+      .style('fill', '#171717')
+      .style('font-family', 'Montserrat, sans-serif')
+      .text(n => n.label);
+
+    // Sub label
+    g.append('text')
+      .attr('text-anchor', labelAnchor)
+      .attr('dx', labelDx)
+      .attr('dy', labelDy2)
+      .style('font-size', '12px')
+      .style('fill', '#171717')
+      .style('font-family', 'Montserrat, sans-serif')
+      .text(n => n.sub);
+
+    // Center node
+    const cg = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+    cg.append('circle').attr('r', 38).attr('fill', '#f0fdfa').attr('stroke', '#0d9488').attr('stroke-width', 1.5);
+    cg.append('text').attr('text-anchor', 'middle').attr('dy', -5)
+      .style('font-size', '13px').style('font-weight', '500')
+      .style('fill', '#0d9488').style('font-family', 'Montserrat, sans-serif')
+      .text('Ontologer');
+    cg.append('text').attr('text-anchor', 'middle').attr('dy', 11)
+      .style('font-size', '12px')
+      .style('fill', '#0d9488').style('font-family', 'Montserrat, sans-serif')
+      .text('data network');
+  });
+
   const steps = [
     { n: 1,  label: 'Product Orientation',      desc: 'Define your brand, ingredients, dosage, pack sizes and sales baseline.' },
     { n: 2,  label: 'Environment Understanding', desc: 'Assess India macro, pharma market dynamics and category attractiveness.' },
@@ -40,46 +144,17 @@
     </div>
   </section>
 
-  <!-- ── Built-in intelligence ── -->
-  <section class="intel-band">
+  <!-- ── Ontologer network ── -->
+  <section class="network-band">
     <div class="band-inner">
       <div class="band-header">
-        <span class="band-eyebrow">Pre-loaded data</span>
-        <h2 class="band-title">Everything you need is already inside.</h2>
-        <p class="band-sub">No data uploads required. The workspace arrives pre-populated with market intelligence, clinical evidence, and HCP universe data.</p>
+        <span class="band-eyebrow">Data sources</span>
+        <h2 class="band-title">Powered by the Ontologer network.</h2>
+        <p class="band-sub">Every step in the workspace draws from a live graph of clinical, commercial, and HCP data — queried in real time.</p>
       </div>
-      <div class="intel-grid">
-        <div class="intel-card">
-          <div class="intel-card-label">Market data</div>
-          <div class="intel-card-title">IQVIA AWACS V3X2</div>
-          <ul class="intel-list">
-            <li>42 brands tracked across 5 MAT periods</li>
-            <li>Category value ₹139 Cr, growing at 7.8% CAGR</li>
-            <li>Market share, SKU counts, company groupings</li>
-            <li>Competitive leaderboard Dec 2017 – Dec 2021</li>
-          </ul>
-        </div>
-        <div class="intel-card">
-          <div class="intel-card-label">Clinical evidence</div>
-          <div class="intel-card-title">563K trials · 28M publications</div>
-          <ul class="intel-list">
-            <li>Semantic search across ClinicalTrials.gov</li>
-            <li>PubMed publication index via Ontologer</li>
-            <li>Ingredient-level evidence for Ayurvedic actives</li>
-            <li>Condition-level trial counts for indication sizing</li>
-          </ul>
-        </div>
-        <div class="intel-card">
-          <div class="intel-card-label">HCP universe</div>
-          <div class="intel-card-title">Doctor potential model</div>
-          <ul class="intel-list">
-            <li>50,000 GPs · 37,000 Gynecologists</li>
-            <li>27,000 Urologists · 18,000 Sexologists</li>
-            <li>Prescriber influence weights by specialty</li>
-            <li>Coverage and segmentation tier framework</li>
-          </ul>
-        </div>
-      </div>
+    </div>
+    <div class="network-svg-wrap">
+      <svg bind:this={svgEl}></svg>
     </div>
   </section>
 
@@ -293,46 +368,19 @@
   }
   .band-header { margin-bottom: 36px; }
 
-  /* ── Built-in intelligence band ── */
-  .intel-band {
+  /* ── Ontologer network band ── */
+  .network-band {
     background: #f5f5f5;
     border-top: 1px solid #e5e5e5;
     border-bottom: 1px solid #e5e5e5;
-    padding: 64px 0;
+    padding: 64px 0 40px;
   }
-  .intel-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: #e5e5e5;
-    border: 1px solid #e5e5e5;
+  .network-svg-wrap {
+    max-width: 1100px; margin: 0 auto;
+    padding: 0 48px;
   }
-  .intel-card {
-    background: #ffffff;
-    padding: 24px 22px;
-  }
-  .intel-card-label {
-    font-size: 0.75rem; font-weight: 500;
-    color: #0d9488; text-transform: uppercase;
-    letter-spacing: 0.1em; margin-bottom: 6px;
-  }
-  .intel-card-title {
-    font-size: 0.875rem; font-weight: 500;
-    color: #171717; margin-bottom: 14px;
-  }
-  .intel-list {
-    list-style: none; padding: 0; margin: 0;
-    display: flex; flex-direction: column; gap: 7px;
-  }
-  .intel-list li {
-    font-size: 0.75rem; color: #171717;
-    line-height: 1.5;
-    padding-left: 12px; position: relative;
-  }
-  .intel-list li::before {
-    content: '—';
-    position: absolute; left: 0;
-    color: #d4d4d4;
+  .network-svg-wrap svg {
+    width: 100%; display: block;
   }
 
   /* ── How it works band ── */
@@ -514,9 +562,10 @@
   @media (max-width: 768px) {
     .hero, .steps-section, .footer-cta { padding: 48px 24px; }
     .nav { padding: 0 24px; }
-    .steps-grid, .intel-grid { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: 1fr; }
     .band-inner { padding: 0 24px; }
-    .intel-band, .how-band, .output-band { padding: 48px 0; }
+    .network-band, .how-band, .output-band { padding: 48px 0; }
+    .network-svg-wrap { padding: 0 24px; }
     .how-steps { flex-direction: column; gap: 24px; }
     .how-arrow { display: none; }
     .output-inner { grid-template-columns: 1fr; gap: 32px; }
