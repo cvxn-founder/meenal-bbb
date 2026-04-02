@@ -50,7 +50,7 @@
     background: var(--chrome-bg);
     border-right: 1px solid var(--panel-border);
     display: flex; flex-direction: column;
-    position: fixed; left: 0; top: 0; z-index: 100;
+    position: fixed; left: 48px; top: 0; z-index: 100;
   }
 
   .logo {

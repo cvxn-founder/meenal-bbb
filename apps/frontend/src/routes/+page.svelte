@@ -221,7 +221,7 @@
   /* ── Nav ── */
   .nav {
     display: flex; align-items: center; gap: 12px;
-    padding: 0 48px; height: 56px;
+    padding: 0 40px; height: 56px;
     border-bottom: 1px solid #e5e5e5;
     background: #ffffff;
     position: sticky; top: 0; z-index: 50;

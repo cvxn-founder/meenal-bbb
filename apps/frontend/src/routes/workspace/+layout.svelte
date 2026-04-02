@@ -1,5 +1,4 @@
 <script>
-  import '$lib/../app.css';
   import Sidebar from '$lib/components/Sidebar.svelte';
   let { children } = $props();
 </script>
@@ -14,7 +13,7 @@
 <style>
   .app-shell { display: flex; height: 100vh; overflow: hidden; }
   .main-content {
-    margin-left: 220px; flex: 1;
+    margin-left: 268px; flex: 1;
     display: flex; flex-direction: column;
     height: 100vh; overflow: hidden;
     background: var(--bg);
