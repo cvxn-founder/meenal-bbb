@@ -1,7 +1,6 @@
 <script>
   import '../app.css';
   import Sidebar from '$lib/components/Sidebar.svelte';
-
   let { children } = $props();
 </script>
 
@@ -18,13 +17,13 @@
     height: 100vh;
     overflow: hidden;
   }
-
   .main-content {
-    margin-left: 72px;
+    margin-left: 220px;
     flex: 1;
     display: flex;
     flex-direction: column;
     height: 100vh;
     overflow: hidden;
+    background: var(--bg);
   }
 </style>

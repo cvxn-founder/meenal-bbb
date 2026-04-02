@@ -5,159 +5,167 @@
 
 <nav class="sidebar">
   <div class="logo">
-    <span class="logo-text">BBB</span>
+    <span class="logo-bbb">BBB</span>
+    <span class="logo-sub">Brand Blueprint</span>
   </div>
 
   <div class="steps-list scrollable">
     {#each STEPS as step}
-      {@const unlocked = step.n <= wizardState.currentStep}
-      {@const active = step.n === wizardState.currentStep}
+      {@const completed = step.n < wizardState.currentStep}
+      {@const active    = step.n === wizardState.currentStep}
+      {@const unlocked  = step.n <= wizardState.currentStep}
       <button
         class="step-btn"
         class:active
-        class:unlocked
+        class:completed
         class:locked={!unlocked}
         disabled={!unlocked}
         onclick={() => goToStep(step.n)}
         title={step.label}
       >
-        <span class="step-num">{step.n}</span>
-        <span class="step-short">{step.short}</span>
+        <span class="step-num">
+          {#if completed}
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+              <path d="M1.5 5L4 7.5L8.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          {:else}
+            {step.n}
+          {/if}
+        </span>
+        <span class="step-label">{step.label}</span>
       </button>
     {/each}
   </div>
 
   <div class="sidebar-footer">
-    <span class="powered">Powered by</span>
-    <span class="ontologer">Ontologer</span>
+    <span class="powered-by">Powered by</span>
+    <span class="powered-name">Ontologer</span>
   </div>
 </nav>
 
 <style>
   .sidebar {
-    width: 72px;
-    min-width: 72px;
+    width: 220px;
+    min-width: 220px;
     height: 100vh;
     background: var(--chrome-bg);
     border-right: 1px solid var(--panel-border);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 0;
     position: fixed;
-    left: 0;
-    top: 0;
+    left: 0; top: 0;
     z-index: 100;
   }
 
   .logo {
-    width: 100%;
-    height: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 18px 20px 16px;
     border-bottom: 1px solid var(--panel-border);
     flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
   }
-
-  .logo-text {
-    font-size: 1rem;
+  .logo-bbb {
+    font-size: 0.95rem;
     font-weight: 500;
     color: var(--accent);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
+  }
+  .logo-sub {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
   }
 
   .steps-list {
     flex: 1;
-    width: 100%;
     overflow-y: auto;
-    overflow-x: hidden;
-    padding: 8px 0;
+    padding: 8px 10px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 2px;
-  }
-
-  .step-btn {
-    width: 56px;
-    height: 52px;
-    border-radius: 10px;
-    border: 1px solid transparent;
-    background: transparent;
-    color: var(--text-muted);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
-    cursor: pointer;
-    transition: all 0.15s;
-    padding: 0;
-  }
-
-  .step-btn.unlocked {
-    color: var(--text-muted);
-    cursor: pointer;
-  }
-
-  .step-btn.unlocked:hover {
-    background: var(--accent-muted);
-    border-color: var(--panel-border);
-    color: var(--accent);
-  }
-
-  .step-btn.active {
-    background: var(--accent-muted);
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  .step-btn.locked {
-    opacity: 0.35;
-    cursor: not-allowed;
-  }
-
-  .step-num {
-    font-size: 0.9rem;
-    font-weight: 500;
-    line-height: 1;
-  }
-
-  .step-short {
-    font-size: 0.5rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    line-height: 1;
-    max-width: 54px;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .sidebar-footer {
-    width: 100%;
-    padding: 10px 4px;
-    border-top: 1px solid var(--panel-border);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     gap: 1px;
   }
 
-  .powered {
-    font-size: 0.48rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+  .step-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 10px;
+    border-radius: 6px;
+    background: transparent;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.12s;
   }
 
-  .ontologer {
+  .step-btn.locked {
+    opacity: 0.38;
+    cursor: not-allowed;
+  }
+
+  /* Unlocked but not active — hover state */
+  .step-btn:not(.active):not(.locked):hover {
+    background: #f5f5f5;
+  }
+
+  /* Active step */
+  .step-btn.active {
+    background: var(--accent-muted);
+    box-shadow: inset 3px 0 0 var(--accent);
+  }
+  .step-btn.active .step-num  { color: var(--accent); background: rgba(13,148,136,0.12); }
+  .step-btn.active .step-label { color: var(--accent); font-weight: 500; }
+
+  /* Completed step */
+  .step-btn.completed .step-num  { color: var(--green); background: var(--green-bg); }
+  .step-btn.completed .step-label { color: #525252; }
+
+  /* Default (unlocked, not active/completed) */
+  .step-btn:not(.active):not(.completed):not(.locked) .step-num  { color: #a3a3a3; background: #f5f5f5; }
+  .step-btn:not(.active):not(.completed):not(.locked) .step-label { color: #525252; }
+
+  .step-num {
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-xs);
+    font-weight: 500;
+    flex-shrink: 0;
+    transition: color 0.12s, background 0.12s;
+  }
+
+  .step-label {
+    font-size: var(--text-sm);
+    line-height: 1.3;
+    transition: color 0.12s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sidebar-footer {
+    padding: 12px 20px;
+    border-top: 1px solid var(--panel-border);
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    flex-shrink: 0;
+  }
+  .powered-by {
     font-size: 0.55rem;
+    color: #a3a3a3;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+  .powered-name {
+    font-size: var(--text-xs);
     font-weight: 500;
     color: var(--accent);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.03em;
   }
 </style>

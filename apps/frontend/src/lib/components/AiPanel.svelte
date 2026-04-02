@@ -3,14 +3,14 @@
 </script>
 
 <div class="ai-panel">
-  <div class="ai-panel-header">
+  <div class="ai-header">
     <span class="ai-label">AI Analysis</span>
-    <span class="model-badge">Qwen</span>
+    <span class="model-tag">Qwen</span>
   </div>
 
   <button class="primary analyze-btn" onclick={onAnalyze} disabled={loading}>
     {#if loading}
-      <span class="spinner"></span> Analyzing...
+      <span class="spinner"></span> Analyzing…
     {:else}
       {buttonLabel}
     {/if}
@@ -18,102 +18,79 @@
 
   {#if loading}
     <div class="skeleton-wrap">
-      <div class="skeleton" style="width: 90%"></div>
-      <div class="skeleton" style="width: 75%"></div>
-      <div class="skeleton" style="width: 85%"></div>
-      <div class="skeleton" style="width: 60%"></div>
-      <div class="skeleton" style="width: 80%"></div>
-      <div class="skeleton" style="width: 70%"></div>
+      <div class="skeleton" style="width:90%"></div>
+      <div class="skeleton" style="width:75%"></div>
+      <div class="skeleton" style="width:83%"></div>
+      <div class="skeleton" style="width:60%"></div>
+      <div class="skeleton" style="width:78%"></div>
     </div>
   {:else if narrative}
-    <div class="narrative-wrap scrollable">
-      <div class="ai-narrative">{@html narrative}</div>
+    <div class="narrative-box">
+      <div class="narrative-inner">
+        <div class="ai-narrative">{@html narrative}</div>
+      </div>
     </div>
   {:else}
-    <div class="empty-state">
-      <p>Fill in the fields on the left, then click the button above to get AI-powered insights.</p>
-    </div>
+    <p class="empty-hint">Fill in the fields, then click the button above to get AI insights for this step.</p>
   {/if}
 </div>
 
 <style>
-  .ai-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    height: 100%;
-  }
+  .ai-panel { display: flex; flex-direction: column; gap: 12px; }
 
-  .ai-panel-header {
-    display: flex;
-    align-items: center;
+  .ai-header {
+    display: flex; align-items: center;
     justify-content: space-between;
   }
-
   .ai-label {
-    font-size: var(--text-xs);
-    font-weight: 500;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    font-size: var(--text-xs); font-weight: 500;
+    color: #a3a3a3;
+    text-transform: uppercase; letter-spacing: 0.08em;
   }
-
-  .model-badge {
-    font-size: var(--text-xs);
-    font-weight: 500;
+  .model-tag {
+    font-size: var(--text-xs); font-weight: 500;
     color: var(--accent);
     background: var(--accent-muted);
-    border: 1px solid var(--panel-border);
-    padding: 2px 8px;
-    border-radius: 4px;
+    border: 1px solid var(--accent-border);
+    padding: 1px 7px; border-radius: 4px;
   }
 
   .analyze-btn {
-    width: 100%;
-    padding: 10px;
+    width: 100%; padding: 10px;
     font-size: var(--text-sm);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+    display: flex; align-items: center;
+    justify-content: center; gap: 8px;
   }
 
   .spinner {
-    width: 14px;
-    height: 14px;
-    border: 2px solid var(--accent);
-    border-top-color: transparent;
+    width: 13px; height: 13px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top-color: #ffffff;
     border-radius: 50%;
     animation: spin 0.7s linear infinite;
-    display: inline-block;
     flex-shrink: 0;
   }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
-  @keyframes spin {
-    to { transform: rotate(360deg); }
+  .skeleton-wrap { display: flex; flex-direction: column; gap: 7px; padding: 2px 0; }
+
+  /* Consultant comment box style */
+  .narrative-box {
+    border-left: 3px solid var(--accent);
+    background: #fafafa;
+    border-radius: 0 6px 6px 0;
+    overflow: hidden;
   }
-
-  .skeleton-wrap {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 4px 0;
-  }
-
-  .narrative-wrap {
-    flex: 1;
+  .narrative-inner {
+    padding: 14px 16px;
+    max-height: 360px;
     overflow-y: auto;
-    padding-right: 4px;
   }
 
-  .empty-state {
-    padding: 20px 0;
-    text-align: center;
-  }
-
-  .empty-state p {
+  .empty-hint {
     font-size: var(--text-sm);
-    color: var(--text-muted);
+    color: #a3a3a3;
     line-height: 1.6;
+    margin: 0;
   }
 </style>

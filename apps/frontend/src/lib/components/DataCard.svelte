@@ -7,7 +7,7 @@
   {#if loading}
     <div class="skeleton" style="width: 80%"></div>
     <div class="skeleton" style="width: 65%"></div>
-    <div class="skeleton" style="width: 75%"></div>
+    <div class="skeleton" style="width: 72%"></div>
   {:else}
     {@render children?.()}
   {/if}
@@ -19,17 +19,14 @@
     border: 1px solid var(--panel-border);
     border-radius: var(--panel-radius);
     padding: 14px 16px;
-    margin-bottom: 12px;
-  }
-
-  .data-card-title {
-    font-size: var(--text-xs);
-    font-weight: 500;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
     margin-bottom: 10px;
-    padding-bottom: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  .data-card-title {
+    font-size: var(--text-xs); font-weight: 500;
+    color: #a3a3a3;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 10px; padding-bottom: 8px;
     border-bottom: 1px solid var(--divider);
   }
 </style>

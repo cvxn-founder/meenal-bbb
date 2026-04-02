@@ -4,7 +4,7 @@
 
 <header class="step-header">
   <div class="step-meta">
-    <span class="step-label">Step {stepNum} of 12</span>
+    <span class="step-pill">Step {stepNum} / 12</span>
     {#if subtitle}
       <span class="step-subtitle">{subtitle}</span>
     {/if}
@@ -14,36 +14,29 @@
 
 <style>
   .step-header {
-    padding: 18px 28px 16px;
+    padding: 20px 28px 16px;
     border-bottom: 1px solid var(--panel-border);
     background: var(--chrome-bg);
     flex-shrink: 0;
   }
-
   .step-meta {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 4px;
+    display: flex; align-items: center;
+    gap: 10px; margin-bottom: 5px;
   }
-
-  .step-label {
-    font-size: var(--text-xs);
-    font-weight: 500;
+  .step-pill {
+    font-size: var(--text-xs); font-weight: 500;
     color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    background: var(--accent-muted);
+    border: 1px solid var(--accent-border);
+    padding: 2px 8px; border-radius: 4px;
+    letter-spacing: 0.04em;
   }
-
   .step-subtitle {
-    font-size: var(--text-xs);
+    font-size: var(--text-sm);
     color: var(--text-muted);
   }
-
   .step-title {
-    font-size: var(--text-xl);
-    font-weight: 500;
-    color: var(--text);
-    line-height: 1.2;
+    font-size: var(--text-xl); font-weight: 500;
+    color: var(--text); margin: 0; line-height: 1.25;
   }
 </style>
