@@ -6,18 +6,16 @@
   onMount(async () => {
     const d3 = await import('d3');
 
-    // Fixed viewBox coordinate space — SVG scales via CSS width:100%
+    // Fixed viewBox — SVG scales via CSS width:100%
     const VW = 900, VH = 380;
 
-    // Left centroid
-    const lx = 120, ly = VH / 2;
-    // Measured text: "Ontologer" ~68px, "data network" ~76px at 13/12px Montserrat
-    // Padding 16px each side → r = (76/2) + 16 = 54
-    const lr = 54;
+    // Centroid rectangle dimensions (sized to text + padding)
+    // "Ontologer" ~68px, "data network" ~76px at 13/12px → rw = 76 + 32 = 108 → use 112
+    const rw = 112, rh = 54;
+    const lx = rw / 2 + 20, ly = VH / 2; // centroid centre
 
-    // Right nodes — x fixed, y evenly spaced and centred on ly
-    const rx = 680;
-    const rr = 5;
+    // Right nodes
+    const rx = 700, rr = 5;
     const nodes = [
       { label: 'IQVIA AWACS',        sub: 'V3X2 · 42 brands · 5yr MAT'   },
       { label: 'ClinicalTrials.gov', sub: '563,000 indexed trials'        },
@@ -31,20 +29,19 @@
     const startY = ly - totalH / 2;
     nodes.forEach((n, i) => { n.x = rx; n.y = startY + i * gap; });
 
-    // d3.linkHorizontal: cubic bezier S-curve, control pts at midpoint x
+    // d3.linkHorizontal: true cubic bezier S-curve
     const link = d3.linkHorizontal().x(d => d.x).y(d => d.y);
 
     const svg = d3.select(svgEl)
       .attr('viewBox', `0 0 ${VW} ${VH}`)
       .attr('preserveAspectRatio', 'xMidYMid meet');
 
-    // Dashed bezier edges — source exits right edge of centroid circle,
-    // target enters left edge of node dot
+    // Dashed bezier edges — exits right edge of rect, enters left of dot
     nodes.forEach(n => {
       svg.append('path')
         .attr('d', link({
-          source: { x: lx + lr, y: ly },
-          target: { x: n.x - rr,  y: n.y },
+          source: { x: lx + rw / 2, y: ly },
+          target: { x: n.x - rr,    y: n.y },
         }))
         .attr('fill', 'none')
         .attr('stroke', '#a3a3a3')
@@ -60,41 +57,41 @@
 
     g.append('circle')
       .attr('r', rr)
-      .attr('fill', '#ffffff')
-      .attr('stroke', '#a3a3a3')
+      .attr('fill', '#f5f5f5')
+      .attr('stroke', '#737373')
       .attr('stroke-width', 1.5);
 
     g.append('text')
-      .attr('x', 13).attr('dy', '-0.15em')
+      .attr('x', 14).attr('dy', '-0.15em')
       .style('font-size', '13px').style('font-weight', '500')
       .style('fill', '#171717').style('font-family', 'Montserrat, sans-serif')
       .text(n => n.label);
 
     g.append('text')
-      .attr('x', 13).attr('dy', '1.1em')
+      .attr('x', 14).attr('dy', '1.1em')
       .style('font-size', '12px')
-      .style('fill', '#171717').style('font-family', 'Montserrat, sans-serif')
+      .style('fill', '#525252').style('font-family', 'Montserrat, sans-serif')
       .text(n => n.sub);
 
-    // Centroid circle — sized to wrap text
+    // Centroid rectangle — neutral-900 bg, white text
     const cg = svg.append('g').attr('transform', `translate(${lx},${ly})`);
 
-    cg.append('circle')
-      .attr('r', lr)
-      .attr('fill', '#f0fdfa')
-      .attr('stroke', '#0d9488')
-      .attr('stroke-width', 1.5);
+    cg.append('rect')
+      .attr('x', -rw / 2).attr('y', -rh / 2)
+      .attr('width', rw).attr('height', rh)
+      .attr('fill', '#171717')
+      .attr('rx', 4);
 
     cg.append('text')
       .attr('text-anchor', 'middle').attr('dy', '-0.3em')
       .style('font-size', '13px').style('font-weight', '500')
-      .style('fill', '#0d9488').style('font-family', 'Montserrat, sans-serif')
+      .style('fill', '#ffffff').style('font-family', 'Montserrat, sans-serif')
       .text('Ontologer');
 
     cg.append('text')
       .attr('text-anchor', 'middle').attr('dy', '1.1em')
       .style('font-size', '12px')
-      .style('fill', '#0d9488').style('font-family', 'Montserrat, sans-serif')
+      .style('fill', '#a3a3a3').style('font-family', 'Montserrat, sans-serif')
       .text('data network');
   });
 
