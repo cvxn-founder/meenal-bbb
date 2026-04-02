@@ -27,7 +27,7 @@
     font-size: var(--text-xs); font-weight: 500;
     color: var(--accent);
     background: var(--accent-muted);
-    border: 1px solid var(--accent-border);
+    border: 1px solid var(--accent);
     padding: 2px 8px; border-radius: 4px;
     letter-spacing: 0.04em;
   }

@@ -24,7 +24,7 @@
   }
   .data-card-title {
     font-size: var(--text-xs); font-weight: 500;
-    color: #a3a3a3;
+    color: #525252;
     text-transform: uppercase; letter-spacing: 0.08em;
     margin-bottom: 10px; padding-bottom: 8px;
     border-bottom: 1px solid var(--divider);

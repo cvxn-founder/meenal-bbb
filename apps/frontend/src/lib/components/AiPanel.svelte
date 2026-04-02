@@ -44,14 +44,14 @@
   }
   .ai-label {
     font-size: var(--text-xs); font-weight: 500;
-    color: #a3a3a3;
+    color: #525252;
     text-transform: uppercase; letter-spacing: 0.08em;
   }
   .model-tag {
     font-size: var(--text-xs); font-weight: 500;
     color: var(--accent);
     background: var(--accent-muted);
-    border: 1px solid var(--accent-border);
+    border: 1px solid var(--accent);
     padding: 1px 7px; border-radius: 4px;
   }
 
@@ -89,7 +89,7 @@
 
   .empty-hint {
     font-size: var(--text-sm);
-    color: #a3a3a3;
+    color: #525252;
     line-height: 1.6;
     margin: 0;
   }

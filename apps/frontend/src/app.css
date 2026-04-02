@@ -14,9 +14,9 @@
 
   /* Text */
   --text:          #171717;   /* neutral-900 */
-  --text-muted:    #737373;   /* neutral-500 */
-  --muted:         #737373;
-  --muted-dim:     #a3a3a3;   /* neutral-400 */
+  --text-muted:    #525252;   /* neutral-500 */
+  --muted:         #525252;
+  --muted-dim:     #525252;   /* neutral-400 */
   --muted-faint:   #d4d4d4;   /* neutral-300 */
 
   /* Accent — teal */
