@@ -40,6 +40,49 @@
     </div>
   </section>
 
+  <!-- ── Built-in intelligence ── -->
+  <section class="intel-band">
+    <div class="band-inner">
+      <div class="band-header">
+        <span class="band-eyebrow">Pre-loaded data</span>
+        <h2 class="band-title">Everything you need is already inside.</h2>
+        <p class="band-sub">No data uploads required. The workspace arrives pre-populated with market intelligence, clinical evidence, and HCP universe data.</p>
+      </div>
+      <div class="intel-grid">
+        <div class="intel-card">
+          <div class="intel-card-label">Market data</div>
+          <div class="intel-card-title">IQVIA AWACS V3X2</div>
+          <ul class="intel-list">
+            <li>42 brands tracked across 5 MAT periods</li>
+            <li>Category value ₹139 Cr, growing at 7.8% CAGR</li>
+            <li>Market share, SKU counts, company groupings</li>
+            <li>Competitive leaderboard Dec 2017 – Dec 2021</li>
+          </ul>
+        </div>
+        <div class="intel-card">
+          <div class="intel-card-label">Clinical evidence</div>
+          <div class="intel-card-title">563K trials · 28M publications</div>
+          <ul class="intel-list">
+            <li>Semantic search across ClinicalTrials.gov</li>
+            <li>PubMed publication index via Ontologer</li>
+            <li>Ingredient-level evidence for Ayurvedic actives</li>
+            <li>Condition-level trial counts for indication sizing</li>
+          </ul>
+        </div>
+        <div class="intel-card">
+          <div class="intel-card-label">HCP universe</div>
+          <div class="intel-card-title">Doctor potential model</div>
+          <ul class="intel-list">
+            <li>50,000 GPs · 37,000 Gynecologists</li>
+            <li>27,000 Urologists · 18,000 Sexologists</li>
+            <li>Prescriber influence weights by specialty</li>
+            <li>Coverage and segmentation tier framework</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ── Steps grid ── -->
   <section class="steps-section">
     <div class="steps-header">
@@ -56,6 +99,78 @@
           </div>
         </div>
       {/each}
+    </div>
+  </section>
+
+  <!-- ── How it works ── -->
+  <section class="how-band">
+    <div class="band-inner">
+      <div class="band-header">
+        <span class="band-eyebrow">Workflow</span>
+        <h2 class="band-title">How a session works.</h2>
+      </div>
+      <div class="how-steps">
+        <div class="how-step">
+          <span class="how-n">1</span>
+          <div class="how-info">
+            <div class="how-label">Enter your brand</div>
+            <div class="how-desc">Input your brand name, active ingredients, dosage form, pack sizes, and current sales figures in Step 1.</div>
+          </div>
+        </div>
+        <div class="how-arrow">→</div>
+        <div class="how-step">
+          <span class="how-n">2</span>
+          <div class="how-info">
+            <div class="how-label">Review pre-loaded data</div>
+            <div class="how-desc">Each subsequent step surfaces relevant AWACS data, clinical trial evidence, and market benchmarks automatically.</div>
+          </div>
+        </div>
+        <div class="how-arrow">→</div>
+        <div class="how-step">
+          <span class="how-n">3</span>
+          <div class="how-info">
+            <div class="how-label">Generate narrative</div>
+            <div class="how-desc">When ready, generate an AI-written consultant narrative for each step — grounded in the data already on screen.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── What you produce ── -->
+  <section class="output-band">
+    <div class="band-inner output-inner">
+      <div class="output-left">
+        <span class="band-eyebrow">Outputs</span>
+        <h2 class="band-title">What you walk away with.</h2>
+        <p class="band-sub">A complete brand strategy document — structured, evidence-backed, ready to present.</p>
+      </div>
+      <div class="output-list">
+        <div class="output-row">
+          <span class="output-check">✓</span>
+          <span class="output-text">Market sizing with category and competitive benchmarks</span>
+        </div>
+        <div class="output-row">
+          <span class="output-check">✓</span>
+          <span class="output-text">Patient funnel with quantified leakage at each stage</span>
+        </div>
+        <div class="output-row">
+          <span class="output-check">✓</span>
+          <span class="output-text">Competitive doctor coverage and white-space map</span>
+        </div>
+        <div class="output-row">
+          <span class="output-check">✓</span>
+          <span class="output-text">Brand wheel — features, SMP, essence, evidence</span>
+        </div>
+        <div class="output-row">
+          <span class="output-check">✓</span>
+          <span class="output-text">HCP segmentation tiers and coverage prioritisation</span>
+        </div>
+        <div class="output-row">
+          <span class="output-check">✓</span>
+          <span class="output-text">Full SWOT with AI-synthesised strategic commentary</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -155,6 +270,130 @@
   }
   .hero-note {
     font-size: 0.72rem; color: #171717;
+  }
+
+  /* ── Shared band helpers ── */
+  .band-inner {
+    max-width: 1100px; margin: 0 auto;
+    padding: 0 48px;
+  }
+  .band-eyebrow {
+    font-size: 0.7rem; font-weight: 500;
+    color: #0d9488; text-transform: uppercase;
+    letter-spacing: 0.12em; display: block; margin-bottom: 10px;
+  }
+  .band-title {
+    font-size: 1.5rem; font-weight: 500;
+    color: #171717; margin: 0 0 10px;
+    letter-spacing: -0.01em; line-height: 1.2;
+  }
+  .band-sub {
+    font-size: 0.875rem; color: #171717;
+    margin: 0; line-height: 1.65; max-width: 540px;
+  }
+  .band-header { margin-bottom: 36px; }
+
+  /* ── Built-in intelligence band ── */
+  .intel-band {
+    background: #f5f5f5;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 64px 0;
+  }
+  .intel-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: #e5e5e5;
+    border: 1px solid #e5e5e5;
+  }
+  .intel-card {
+    background: #ffffff;
+    padding: 24px 22px;
+  }
+  .intel-card-label {
+    font-size: 0.65rem; font-weight: 500;
+    color: #0d9488; text-transform: uppercase;
+    letter-spacing: 0.1em; margin-bottom: 6px;
+  }
+  .intel-card-title {
+    font-size: 0.875rem; font-weight: 500;
+    color: #171717; margin-bottom: 14px;
+  }
+  .intel-list {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 7px;
+  }
+  .intel-list li {
+    font-size: 0.75rem; color: #171717;
+    line-height: 1.5;
+    padding-left: 12px; position: relative;
+  }
+  .intel-list li::before {
+    content: '—';
+    position: absolute; left: 0;
+    color: #d4d4d4;
+  }
+
+  /* ── How it works band ── */
+  .how-band {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 64px 0;
+  }
+  .how-steps {
+    display: flex; align-items: flex-start; gap: 0;
+  }
+  .how-step {
+    flex: 1;
+    display: flex; gap: 14px;
+    align-items: flex-start;
+  }
+  .how-arrow {
+    font-size: 1rem; color: #d4d4d4;
+    padding: 0 20px; padding-top: 2px;
+    flex-shrink: 0; align-self: flex-start;
+  }
+  .how-n {
+    width: 26px; height: 26px; flex-shrink: 0;
+    border: 1px solid #0d9488;
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.72rem; font-weight: 500; color: #0d9488;
+    margin-top: 1px;
+  }
+  .how-info { display: flex; flex-direction: column; gap: 5px; }
+  .how-label { font-size: 0.8125rem; font-weight: 500; color: #171717; }
+  .how-desc { font-size: 0.75rem; color: #171717; line-height: 1.6; }
+
+  /* ── What you produce band ── */
+  .output-band {
+    background: #f5f5f5;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 64px 0;
+  }
+  .output-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .output-left { display: flex; flex-direction: column; gap: 0; }
+  .output-list {
+    display: flex; flex-direction: column;
+    border: 1px solid #e5e5e5;
+    background: #ffffff;
+  }
+  .output-row {
+    display: flex; align-items: baseline; gap: 12px;
+    padding: 13px 18px;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 0.8125rem; color: #171717;
+  }
+  .output-row:last-child { border-bottom: none; }
+  .output-check {
+    color: #0d9488; font-size: 0.75rem;
+    flex-shrink: 0; font-weight: 500;
   }
 
   /* ── Steps section ── */
@@ -275,10 +514,12 @@
   @media (max-width: 768px) {
     .hero, .steps-section, .footer-cta { padding: 48px 24px; }
     .nav { padding: 0 24px; }
-    .steps-grid { grid-template-columns: 1fr; }
-    .hero-stat-row { flex-direction: column; gap: 20px; }
-    .hero-stat { border-right: none; padding: 0; border-bottom: 1px solid #e5e5e5; padding-bottom: 20px; }
-    .hero-stat:last-child { border-bottom: none; }
+    .steps-grid, .intel-grid { grid-template-columns: 1fr; }
+    .band-inner { padding: 0 24px; }
+    .intel-band, .how-band, .output-band { padding: 48px 0; }
+    .how-steps { flex-direction: column; gap: 24px; }
+    .how-arrow { display: none; }
+    .output-inner { grid-template-columns: 1fr; gap: 32px; }
     .data-strip { padding: 20px 24px; }
     .footer { padding: 20px 24px; }
   }
