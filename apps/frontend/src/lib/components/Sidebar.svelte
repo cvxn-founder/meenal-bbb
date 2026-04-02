@@ -64,7 +64,7 @@
     color: var(--accent); letter-spacing: 0.12em;
   }
   .logo-sub {
-    font-size: var(--text-xs); color: #525252;
+    font-size: var(--text-xs); color: #171717;
     letter-spacing: 0.04em;
   }
 
@@ -101,11 +101,11 @@
 
   /* Completed */
   .step-btn.completed .step-num  { color: var(--green); background: var(--green-bg); }
-  .step-btn.completed .step-label { color: #404040; }
+  .step-btn.completed .step-label { color: #171717; }
 
   /* Unlocked, not active/completed */
-  .step-btn:not(.active):not(.completed):not(.locked) .step-num  { color: #525252; background: #f5f5f5; }
-  .step-btn:not(.active):not(.completed):not(.locked) .step-label { color: #404040; }
+  .step-btn:not(.active):not(.completed):not(.locked) .step-num  { color: #171717; background: #f5f5f5; }
+  .step-btn:not(.active):not(.completed):not(.locked) .step-label { color: #171717; }
 
   .step-num {
     width: 22px; height: 22px;
@@ -127,7 +127,7 @@
     flex-shrink: 0;
   }
   .powered-by {
-    font-size: 0.55rem; color: #525252;
+    font-size: 0.55rem; color: #171717;
     text-transform: uppercase; letter-spacing: 0.07em;
   }
   .powered-name {

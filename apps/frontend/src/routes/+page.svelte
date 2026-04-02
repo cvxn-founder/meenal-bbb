@@ -38,24 +38,6 @@
         <span class="hero-note">No sign-in required. State saved locally.</span>
       </div>
     </div>
-    <div class="hero-stat-row">
-      <div class="hero-stat">
-        <span class="stat-num">12</span>
-        <span class="stat-label">Strategic steps</span>
-      </div>
-      <div class="hero-stat">
-        <span class="stat-num">42</span>
-        <span class="stat-label">Brands in dataset</span>
-      </div>
-      <div class="hero-stat">
-        <span class="stat-num">500+</span>
-        <span class="stat-label">Clinical trials indexed</span>
-      </div>
-      <div class="hero-stat">
-        <span class="stat-num">AI</span>
-        <span class="stat-label">Qwen-powered insights</span>
-      </div>
-    </div>
   </section>
 
   <!-- ── Steps grid ── -->
@@ -129,7 +111,7 @@
     color: #0d9488; letter-spacing: 0.12em;
   }
   .nav-tag {
-    font-size: 0.75rem; color: #525252;
+    font-size: 0.75rem; color: #171717;
     padding-left: 12px;
     border-left: 1px solid #e5e5e5;
   }
@@ -163,7 +145,7 @@
     color: #171717; margin: 0 0 20px;
   }
   .hero-sub {
-    font-size: 0.9375rem; color: #404040;
+    font-size: 0.9375rem; color: #171717;
     line-height: 1.65; margin: 0 0 28px;
     max-width: 500px;
   }
@@ -172,30 +154,7 @@
     flex-wrap: wrap;
   }
   .hero-note {
-    font-size: 0.72rem; color: #737373;
-  }
-
-  .hero-stat-row {
-    display: flex; gap: 0;
-    margin-top: 56px;
-    border-top: 1px solid #e5e5e5;
-    padding-top: 32px;
-  }
-  .hero-stat {
-    flex: 1;
-    display: flex; flex-direction: column; gap: 4px;
-    padding-right: 32px;
-    border-right: 1px solid #e5e5e5;
-  }
-  .hero-stat:last-child { border-right: none; padding-left: 32px; padding-right: 0; }
-  .hero-stat:not(:first-child) { padding-left: 32px; }
-  .stat-num {
-    font-size: 1.75rem; font-weight: 500;
-    color: #0d9488; line-height: 1;
-  }
-  .stat-label {
-    font-size: 0.72rem; color: #525252;
-    text-transform: uppercase; letter-spacing: 0.06em;
+    font-size: 0.72rem; color: #171717;
   }
 
   /* ── Steps section ── */
@@ -209,7 +168,7 @@
     color: #171717; margin: 0 0 10px;
     letter-spacing: -0.01em;
   }
-  .steps-sub { font-size: 0.875rem; color: #525252; margin: 0; line-height: 1.6; }
+  .steps-sub { font-size: 0.875rem; color: #171717; margin: 0; line-height: 1.6; }
 
   .steps-grid {
     display: grid;
@@ -236,7 +195,7 @@
   }
   .step-info { display: flex; flex-direction: column; gap: 4px; }
   .step-name { font-size: 0.8125rem; font-weight: 500; color: #171717; }
-  .step-desc { font-size: 0.72rem; color: #525252; line-height: 1.55; }
+  .step-desc { font-size: 0.72rem; color: #171717; line-height: 1.55; }
 
   /* ── Data strip ── */
   .data-strip {
@@ -251,13 +210,13 @@
   }
   .strip-label {
     font-size: 0.7rem; font-weight: 500;
-    color: #525252; text-transform: uppercase;
+    color: #171717; text-transform: uppercase;
     letter-spacing: 0.08em; white-space: nowrap;
   }
   .strip-sources { display: flex; gap: 8px; flex-wrap: wrap; }
   .source-pill {
     font-size: 0.72rem; font-weight: 500;
-    color: #404040;
+    color: #171717;
     border: 1px solid #d4d4d4;
     padding: 4px 10px; border-radius: 4px;
     background: #ffffff;
@@ -279,7 +238,7 @@
     letter-spacing: -0.01em;
   }
   .fcta-sub {
-    font-size: 0.875rem; color: #525252;
+    font-size: 0.875rem; color: #171717;
     margin: 0 0 28px; line-height: 1.6;
   }
 
@@ -306,7 +265,7 @@
     padding: 20px 48px;
     border-top: 1px solid #e5e5e5;
     display: flex; align-items: center; gap: 8px;
-    font-size: 0.72rem; color: #737373;
+    font-size: 0.72rem; color: #171717;
     margin-top: auto;
   }
   .footer-dot { color: #d4d4d4; }
