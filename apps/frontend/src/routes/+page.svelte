@@ -122,7 +122,7 @@
 
   <!-- ── Hero ── -->
   <section class="hero">
-    <div class="hero-inner">
+    <div class="hero-left">
       <div class="hero-eyebrow">Pharma Brand Strategy</div>
       <h1 class="hero-title">Structure your brand<br>strategy. Step by step.</h1>
       <p class="hero-sub">
@@ -132,6 +132,19 @@
       <div class="hero-actions">
         <a href="/workspace" class="btn-primary">Start Analysis →</a>
         <span class="hero-note">No sign-in required. State saved locally.</span>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="steps-grid">
+        {#each steps as s}
+          <div class="step-card">
+            <span class="step-n">{s.n}</span>
+            <div class="step-info">
+              <span class="step-name">{s.label}</span>
+              <span class="step-desc">{s.desc}</span>
+            </div>
+          </div>
+        {/each}
       </div>
     </div>
   </section>
@@ -147,60 +160,6 @@
     </div>
     <div class="network-svg-wrap">
       <svg bind:this={svgEl}></svg>
-    </div>
-  </section>
-
-  <!-- ── Steps grid ── -->
-  <section class="steps-section">
-    <div class="steps-header">
-      <h2 class="steps-title">The 12-step framework</h2>
-      <p class="steps-sub">Each step is pre-loaded with relevant market data and generates AI narrative when you're ready.</p>
-    </div>
-    <div class="steps-grid">
-      {#each steps as s}
-        <div class="step-card">
-          <span class="step-n">{s.n}</span>
-          <div class="step-info">
-            <span class="step-name">{s.label}</span>
-            <span class="step-desc">{s.desc}</span>
-          </div>
-        </div>
-      {/each}
-    </div>
-  </section>
-
-  <!-- ── How it works ── -->
-  <section class="how-band">
-    <div class="band-inner">
-      <div class="band-header">
-        <span class="band-eyebrow">Workflow</span>
-        <h2 class="band-title">How a session works.</h2>
-      </div>
-      <div class="how-steps">
-        <div class="how-step">
-          <span class="how-n">1</span>
-          <div class="how-info">
-            <div class="how-label">Enter your brand</div>
-            <div class="how-desc">Input your brand name, active ingredients, dosage form, pack sizes, and current sales figures in Step 1.</div>
-          </div>
-        </div>
-        <div class="how-arrow">→</div>
-        <div class="how-step">
-          <span class="how-n">2</span>
-          <div class="how-info">
-            <div class="how-label">Review pre-loaded data</div>
-            <div class="how-desc">Each subsequent step surfaces relevant AWACS data, clinical trial evidence, and market benchmarks automatically.</div>
-          </div>
-        </div>
-        <div class="how-arrow">→</div>
-        <div class="how-step">
-          <span class="how-n">3</span>
-          <div class="how-info">
-            <div class="how-label">Generate narrative</div>
-            <div class="how-desc">When ready, generate an AI-written consultant narrative for each step — grounded in the data already on screen.</div>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -239,27 +198,6 @@
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- ── Data sources strip ── -->
-  <section class="data-strip">
-    <div class="strip-inner">
-      <span class="strip-label">Powered by</span>
-      <div class="strip-sources">
-        <span class="source-pill">IQVIA AWACS (V3X2)</span>
-        <span class="source-pill">ClinicalTrials.gov — 563K trials</span>
-        <span class="source-pill">PubMed — 28M publications</span>
-        <span class="source-pill">Qwen AI (DashScope)</span>
-        <span class="source-pill accent">Ontologer GraphQL</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Footer CTA ── -->
-  <section class="footer-cta">
-    <h2 class="fcta-title">Ready to build your brand strategy?</h2>
-    <p class="fcta-sub">Work through all 12 steps at your own pace. Your progress saves automatically.</p>
-    <a href="/workspace" class="btn-primary">Start with Product Orientation →</a>
   </section>
 
   <footer class="footer">
@@ -310,11 +248,16 @@
 
   /* ── Hero ── */
   .hero {
-    padding: 72px 48px 56px;
+    padding: 64px 48px 56px;
     border-bottom: 1px solid #e5e5e5;
-    max-width: 1100px; margin: 0 auto; width: 100%;
+    max-width: 1340px; margin: 0 auto; width: 100%;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 56px;
+    align-items: start;
   }
-  .hero-inner { max-width: 620px; }
+  .hero-left {}
+  .hero-right { min-width: 0; }
   .hero-eyebrow {
     font-size: 0.75rem; font-weight: 500;
     color: #0d9488; text-transform: uppercase;
@@ -329,7 +272,6 @@
   .hero-sub {
     font-size: 0.9375rem; color: #171717;
     line-height: 1.65; margin: 0 0 28px;
-    max-width: 500px;
   }
   .hero-actions {
     display: flex; align-items: center; gap: 20px;
@@ -375,40 +317,9 @@
     width: 100%; height: auto; display: block;
   }
 
-  /* ── How it works band ── */
-  .how-band {
-    background: #ffffff;
-    border-bottom: 1px solid #e5e5e5;
-    padding: 64px 0;
-  }
-  .how-steps {
-    display: flex; align-items: flex-start; gap: 0;
-  }
-  .how-step {
-    flex: 1;
-    display: flex; gap: 14px;
-    align-items: flex-start;
-  }
-  .how-arrow {
-    font-size: 1rem; color: #d4d4d4;
-    padding: 0 20px; padding-top: 2px;
-    flex-shrink: 0; align-self: flex-start;
-  }
-  .how-n {
-    width: 26px; height: 26px; flex-shrink: 0;
-    border: 1px solid #0d9488;
-    border-radius: 4px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.75rem; font-weight: 500; color: #0d9488;
-    margin-top: 1px;
-  }
-  .how-info { display: flex; flex-direction: column; gap: 5px; }
-  .how-label { font-size: 0.8125rem; font-weight: 500; color: #171717; }
-  .how-desc { font-size: 0.75rem; color: #171717; line-height: 1.6; }
-
   /* ── What you produce band ── */
   .output-band {
-    background: #f5f5f5;
+    background: #ffffff;
     border-bottom: 1px solid #e5e5e5;
     padding: 64px 0;
   }
@@ -436,19 +347,6 @@
     flex-shrink: 0; font-weight: 500;
   }
 
-  /* ── Steps section ── */
-  .steps-section {
-    padding: 72px 48px;
-    max-width: 1100px; margin: 0 auto; width: 100%;
-  }
-  .steps-header { margin-bottom: 40px; }
-  .steps-title {
-    font-size: 1.5rem; font-weight: 500;
-    color: #171717; margin: 0 0 10px;
-    letter-spacing: -0.01em;
-  }
-  .steps-sub { font-size: 0.875rem; color: #171717; margin: 0; line-height: 1.6; }
-
   .steps-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -475,51 +373,6 @@
   .step-info { display: flex; flex-direction: column; gap: 4px; }
   .step-name { font-size: 0.8125rem; font-weight: 500; color: #171717; }
   .step-desc { font-size: 0.75rem; color: #171717; line-height: 1.55; }
-
-  /* ── Data strip ── */
-  .data-strip {
-    background: #fafafa;
-    border-top: 1px solid #e5e5e5;
-    border-bottom: 1px solid #e5e5e5;
-    padding: 24px 48px;
-  }
-  .strip-inner {
-    max-width: 1100px; margin: 0 auto;
-    display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
-  }
-  .strip-label {
-    font-size: 0.75rem; font-weight: 500;
-    color: #171717; text-transform: uppercase;
-    letter-spacing: 0.08em; white-space: nowrap;
-  }
-  .strip-sources { display: flex; gap: 8px; flex-wrap: wrap; }
-  .source-pill {
-    font-size: 0.75rem; font-weight: 500;
-    color: #171717;
-    border: 1px solid #d4d4d4;
-    padding: 4px 10px; border-radius: 4px;
-    background: #ffffff;
-  }
-  .source-pill.accent {
-    color: #0d9488; border-color: #0d9488;
-    background: #f0fdfa;
-  }
-
-  /* ── Footer CTA ── */
-  .footer-cta {
-    padding: 72px 48px;
-    text-align: center;
-    max-width: 1100px; margin: 0 auto; width: 100%;
-  }
-  .fcta-title {
-    font-size: 1.5rem; font-weight: 500;
-    color: #171717; margin: 0 0 12px;
-    letter-spacing: -0.01em;
-  }
-  .fcta-sub {
-    font-size: 0.875rem; color: #171717;
-    margin: 0 0 28px; line-height: 1.6;
-  }
 
   /* ── Shared button ── */
   .btn-primary {
@@ -551,17 +404,17 @@
   .footer-link { color: #0d9488; text-decoration: none; }
   .footer-link:hover { text-decoration: underline; }
 
-  @media (max-width: 768px) {
-    .hero, .steps-section, .footer-cta { padding: 48px 24px; }
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding: 48px 24px; }
     .nav { padding: 0 24px; }
-    .steps-grid { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: repeat(2, 1fr); }
     .band-inner { padding: 0 24px; }
-    .network-band, .how-band, .output-band { padding: 48px 0; }
+    .network-band, .output-band { padding: 48px 0; }
     .network-svg-wrap { padding: 0 24px; }
-    .how-steps { flex-direction: column; gap: 24px; }
-    .how-arrow { display: none; }
     .output-inner { grid-template-columns: 1fr; gap: 32px; }
-    .data-strip { padding: 20px 24px; }
     .footer { padding: 20px 24px; }
+  }
+  @media (max-width: 480px) {
+    .steps-grid { grid-template-columns: 1fr; }
   }
 </style>
