@@ -6,98 +6,93 @@
   onMount(async () => {
     const d3 = await import('d3');
 
-    const W = svgEl.clientWidth || 900;
-    const H = 440;
-    const cx = W / 2;
-    const cy = H / 2;
-    const R = Math.min(W * 0.36, 175);
+    // Fixed viewBox coordinate space — SVG scales via CSS width:100%
+    const VW = 900, VH = 380;
 
-    const outer = [
-      { label: 'IQVIA AWACS',       sub: 'V3X2 · 42 brands · 5yr MAT',    a: -90  },
-      { label: 'ClinicalTrials.gov', sub: '563,000 indexed trials',         a: -30  },
-      { label: 'PubMed',             sub: '28M publications',               a:  30  },
-      { label: 'HCP Universe',       sub: '132K doctors indexed',           a:  90  },
-      { label: 'Qwen AI',            sub: 'Narrative generation',           a:  150 },
-      { label: 'GraphQL API',        sub: '88 resolvers · real-time',       a: -150 },
+    // Left centroid
+    const lx = 120, ly = VH / 2;
+    // Measured text: "Ontologer" ~68px, "data network" ~76px at 13/12px Montserrat
+    // Padding 16px each side → r = (76/2) + 16 = 54
+    const lr = 54;
+
+    // Right nodes — x fixed, y evenly spaced and centred on ly
+    const rx = 680;
+    const rr = 5;
+    const nodes = [
+      { label: 'IQVIA AWACS',        sub: 'V3X2 · 42 brands · 5yr MAT'   },
+      { label: 'ClinicalTrials.gov', sub: '563,000 indexed trials'        },
+      { label: 'PubMed',             sub: '28M publications'              },
+      { label: 'HCP Universe',       sub: '132K doctors indexed'          },
+      { label: 'Qwen AI',            sub: 'Narrative generation'          },
+      { label: 'GraphQL API',        sub: '88 resolvers · real-time'      },
     ];
+    const gap = 52;
+    const totalH = (nodes.length - 1) * gap;
+    const startY = ly - totalH / 2;
+    nodes.forEach((n, i) => { n.x = rx; n.y = startY + i * gap; });
 
-    outer.forEach(n => {
-      const rad = (n.a * Math.PI) / 180;
-      n.x = cx + R * Math.cos(rad);
-      n.y = cy + R * Math.sin(rad);
-    });
-
-    const bezier = n => {
-      const dx = n.x - cx, dy = n.y - cy;
-      const len = Math.sqrt(dx * dx + dy * dy);
-      const px = (-dy / len) * 36, py = (dx / len) * 36;
-      const c1x = cx + dx * 0.32 + px, c1y = cy + dy * 0.32 + py;
-      const c2x = cx + dx * 0.68 + px, c2y = cy + dy * 0.68 + py;
-      return `M${cx},${cy} C${c1x},${c1y} ${c2x},${c2y} ${n.x},${n.y}`;
-    };
-
-    const labelAnchor = n =>
-      n.x < cx - 20 ? 'end' : n.x > cx + 20 ? 'start' : 'middle';
-    const labelDx = n =>
-      n.x < cx - 20 ? -14 : n.x > cx + 20 ? 14 : 0;
-    const labelDy1 = n => n.y < cy - 20 ? -16 : n.y > cy + 20 ? 20 : -6;
-    const labelDy2 = n => n.y < cy - 20 ? -2  : n.y > cy + 20 ? 34 : 8;
+    // d3.linkHorizontal: cubic bezier S-curve, control pts at midpoint x
+    const link = d3.linkHorizontal().x(d => d.x).y(d => d.y);
 
     const svg = d3.select(svgEl)
-      .attr('viewBox', `0 0 ${W} ${H}`)
-      .attr('width', W)
-      .attr('height', H);
+      .attr('viewBox', `0 0 ${VW} ${VH}`)
+      .attr('preserveAspectRatio', 'xMidYMid meet');
 
-    // Bezier edges
-    svg.selectAll('.edge')
-      .data(outer).enter()
-      .append('path')
-      .attr('d', bezier)
-      .attr('fill', 'none')
-      .attr('stroke', '#d4d4d4')
-      .attr('stroke-width', 1.2);
+    // Dashed bezier edges — source exits right edge of centroid circle,
+    // target enters left edge of node dot
+    nodes.forEach(n => {
+      svg.append('path')
+        .attr('d', link({
+          source: { x: lx + lr, y: ly },
+          target: { x: n.x - rr,  y: n.y },
+        }))
+        .attr('fill', 'none')
+        .attr('stroke', '#a3a3a3')
+        .attr('stroke-width', 1.2)
+        .attr('stroke-dasharray', '5 4');
+    });
 
-    // Outer node dots
-    const g = svg.selectAll('.onode')
-      .data(outer).enter()
+    // Right node dots + labels
+    const g = svg.selectAll('.rn')
+      .data(nodes).enter()
       .append('g')
       .attr('transform', n => `translate(${n.x},${n.y})`);
 
     g.append('circle')
-      .attr('r', 5)
-      .attr('fill', '#fff')
+      .attr('r', rr)
+      .attr('fill', '#ffffff')
       .attr('stroke', '#a3a3a3')
       .attr('stroke-width', 1.5);
 
-    // Main label
     g.append('text')
-      .attr('text-anchor', labelAnchor)
-      .attr('dx', labelDx)
-      .attr('dy', labelDy1)
-      .style('font-size', '12.5px')
-      .style('font-weight', '500')
-      .style('fill', '#171717')
-      .style('font-family', 'Montserrat, sans-serif')
+      .attr('x', 13).attr('dy', '-0.15em')
+      .style('font-size', '13px').style('font-weight', '500')
+      .style('fill', '#171717').style('font-family', 'Montserrat, sans-serif')
       .text(n => n.label);
 
-    // Sub label
     g.append('text')
-      .attr('text-anchor', labelAnchor)
-      .attr('dx', labelDx)
-      .attr('dy', labelDy2)
+      .attr('x', 13).attr('dy', '1.1em')
       .style('font-size', '12px')
-      .style('fill', '#171717')
-      .style('font-family', 'Montserrat, sans-serif')
+      .style('fill', '#171717').style('font-family', 'Montserrat, sans-serif')
       .text(n => n.sub);
 
-    // Center node
-    const cg = svg.append('g').attr('transform', `translate(${cx},${cy})`);
-    cg.append('circle').attr('r', 38).attr('fill', '#f0fdfa').attr('stroke', '#0d9488').attr('stroke-width', 1.5);
-    cg.append('text').attr('text-anchor', 'middle').attr('dy', -5)
+    // Centroid circle — sized to wrap text
+    const cg = svg.append('g').attr('transform', `translate(${lx},${ly})`);
+
+    cg.append('circle')
+      .attr('r', lr)
+      .attr('fill', '#f0fdfa')
+      .attr('stroke', '#0d9488')
+      .attr('stroke-width', 1.5);
+
+    cg.append('text')
+      .attr('text-anchor', 'middle').attr('dy', '-0.3em')
       .style('font-size', '13px').style('font-weight', '500')
       .style('fill', '#0d9488').style('font-family', 'Montserrat, sans-serif')
       .text('Ontologer');
-    cg.append('text').attr('text-anchor', 'middle').attr('dy', 11)
+
+    cg.append('text')
+      .attr('text-anchor', 'middle').attr('dy', '1.1em')
       .style('font-size', '12px')
       .style('fill', '#0d9488').style('font-family', 'Montserrat, sans-serif')
       .text('data network');
@@ -380,7 +375,7 @@
     padding: 0 48px;
   }
   .network-svg-wrap svg {
-    width: 100%; display: block;
+    width: 100%; height: auto; display: block;
   }
 
   /* ── How it works band ── */
