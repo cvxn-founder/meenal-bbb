@@ -248,9 +248,9 @@
 
   /* ── Hero ── */
   .hero {
-    padding: 64px 48px 56px;
+    padding: 64px 40px 56px;
     border-bottom: 1px solid #e5e5e5;
-    max-width: 1340px; margin: 0 auto; width: 100%;
+    max-width: 1260px; margin: 0 auto; width: 100%;
     display: grid;
     grid-template-columns: 320px 1fr;
     gap: 56px;

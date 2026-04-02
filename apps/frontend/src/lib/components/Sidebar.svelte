@@ -46,11 +46,11 @@
 <style>
   .sidebar {
     width: 220px; min-width: 220px;
-    height: 100vh;
+    height: 100%;
     background: var(--chrome-bg);
     border-right: 1px solid var(--panel-border);
     display: flex; flex-direction: column;
-    position: fixed; left: 48px; top: 0; z-index: 100;
+    flex-shrink: 0;
   }
 
   .logo {

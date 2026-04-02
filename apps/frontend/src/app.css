@@ -46,6 +46,9 @@
   --text-lg:  1rem;
   --text-xl:  1.2rem;
 
+  /* Layout */
+  --sidebar-w: 56px;
+
   /* Radii — modest */
   --panel-radius:   8px;
   --radius-panel:   8px;

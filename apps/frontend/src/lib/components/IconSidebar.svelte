@@ -60,10 +60,9 @@
 
 <style>
   .icon-sidebar {
-    position: fixed;
-    top: 0; left: 0;
-    width: 48px;
-    height: 100vh;
+    width: var(--sidebar-w);
+    min-width: var(--sidebar-w);
+    height: 100%;
     background: #171717;
     display: flex;
     flex-direction: column;

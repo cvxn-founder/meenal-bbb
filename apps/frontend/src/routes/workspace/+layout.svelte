@@ -11,11 +11,17 @@
 </div>
 
 <style>
-  .app-shell { display: flex; height: 100vh; overflow: hidden; }
+  .app-shell {
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+  }
   .main-content {
-    margin-left: 268px; flex: 1;
-    display: flex; flex-direction: column;
-    height: 100vh; overflow: hidden;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
     background: var(--bg);
   }
 </style>
