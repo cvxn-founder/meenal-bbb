@@ -249,7 +249,7 @@
   }
   .hero-inner { max-width: 620px; }
   .hero-eyebrow {
-    font-size: 0.7rem; font-weight: 500;
+    font-size: 0.75rem; font-weight: 500;
     color: #0d9488; text-transform: uppercase;
     letter-spacing: 0.12em; margin-bottom: 16px;
   }
@@ -269,7 +269,7 @@
     flex-wrap: wrap;
   }
   .hero-note {
-    font-size: 0.72rem; color: #171717;
+    font-size: 0.75rem; color: #171717;
   }
 
   /* ── Shared band helpers ── */
@@ -278,7 +278,7 @@
     padding: 0 48px;
   }
   .band-eyebrow {
-    font-size: 0.7rem; font-weight: 500;
+    font-size: 0.75rem; font-weight: 500;
     color: #0d9488; text-transform: uppercase;
     letter-spacing: 0.12em; display: block; margin-bottom: 10px;
   }
@@ -312,7 +312,7 @@
     padding: 24px 22px;
   }
   .intel-card-label {
-    font-size: 0.65rem; font-weight: 500;
+    font-size: 0.75rem; font-weight: 500;
     color: #0d9488; text-transform: uppercase;
     letter-spacing: 0.1em; margin-bottom: 6px;
   }
@@ -359,7 +359,7 @@
     border: 1px solid #0d9488;
     border-radius: 4px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 0.72rem; font-weight: 500; color: #0d9488;
+    font-size: 0.75rem; font-weight: 500; color: #0d9488;
     margin-top: 1px;
   }
   .how-info { display: flex; flex-direction: column; gap: 5px; }
@@ -425,7 +425,7 @@
   .step-card:hover { background: #fafafa; }
 
   .step-n {
-    font-size: 0.7rem; font-weight: 500;
+    font-size: 0.75rem; font-weight: 500;
     color: #0d9488;
     width: 22px; height: 22px; flex-shrink: 0;
     border: 1px solid #0d9488;
@@ -434,7 +434,7 @@
   }
   .step-info { display: flex; flex-direction: column; gap: 4px; }
   .step-name { font-size: 0.8125rem; font-weight: 500; color: #171717; }
-  .step-desc { font-size: 0.72rem; color: #171717; line-height: 1.55; }
+  .step-desc { font-size: 0.75rem; color: #171717; line-height: 1.55; }
 
   /* ── Data strip ── */
   .data-strip {
@@ -448,13 +448,13 @@
     display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
   }
   .strip-label {
-    font-size: 0.7rem; font-weight: 500;
+    font-size: 0.75rem; font-weight: 500;
     color: #171717; text-transform: uppercase;
     letter-spacing: 0.08em; white-space: nowrap;
   }
   .strip-sources { display: flex; gap: 8px; flex-wrap: wrap; }
   .source-pill {
-    font-size: 0.72rem; font-weight: 500;
+    font-size: 0.75rem; font-weight: 500;
     color: #171717;
     border: 1px solid #d4d4d4;
     padding: 4px 10px; border-radius: 4px;
@@ -504,7 +504,7 @@
     padding: 20px 48px;
     border-top: 1px solid #e5e5e5;
     display: flex; align-items: center; gap: 8px;
-    font-size: 0.72rem; color: #171717;
+    font-size: 0.75rem; color: #171717;
     margin-top: auto;
   }
   .footer-dot { color: #d4d4d4; }
